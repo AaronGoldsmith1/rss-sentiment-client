@@ -7,7 +7,7 @@ class LogIn extends Component {
   constructor() {
     super()
       this.state = {
-        userName: '',
+        username: '',
         email: '',
         password: ''
     }
@@ -15,27 +15,16 @@ class LogIn extends Component {
  
 
   setUserName(e) {
-    this.setState({userName: e.target.value})
-    console.log(this.state)
+    this.setState({username: e.target.value})
   }
 
   setUserEmail(e) {
     this.setState({email: e.target.value})
-    console.log(this.state)
   }
 
   setUserPassword(e) {
     this.setState({password: e.target.value})
-    console.log(this.state)
   }
-
-  handleSubmit(e) {
-    e.preventDefault()
-    console.log(this.state)
-  }
-
-
-
 
   render() {
     return (

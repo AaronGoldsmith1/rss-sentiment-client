@@ -1,12 +1,14 @@
 import React, {Component} from 'react';
 import NavBar from './components/NavBar';
 
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import Home from './pages/Home';
 import SignUp from './pages/SignUp';
 import LogIn from './pages/LogIn';
 import DataView from './pages/DataView';
 import FeedList from './pages/FeedList';
+
+import axios from 'axios';
 
 
 class App extends Component {
@@ -14,7 +16,6 @@ class App extends Component {
     super()
     this.state = {
       currentUser: null,
-      userCredentials: null,
     }
 
     this.handleLogin = this.handleLogin.bind(this)
@@ -24,6 +25,13 @@ class App extends Component {
   handleLogin(e, userData) {
    e.preventDefault()
    console.log('login clicked', userData)
+  //  this.setState({userCredentials: userData}) //dont need this
+   
+   axios.post('http://localhost:4000/api/v1/auth/login', userData, { headers: { 'Content-Type': 'application/json' }})
+      .then((response) => {
+        console.log(response)
+        this.setState({currentUser: response.data.user})
+      })
   }
 
 
