@@ -1,0 +1,12 @@
+.auth-form {
+  margin-top: 20px;
+  width: 50%;
+  margin: 0 auto !important;
+  position: relative;
+  top: 50px;
+  /* box-shadow: 0 0 10px #000000 */
+}
+
+.ui.stacked.segment:after {
+  display: none;
+}

@@ -1,14 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import '../auth.css'
+
 const SignUp = () => {
   return (
-    <div class="ui middle aligned center aligned grid">
+    <div class="ui middle aligned center aligned grid auth-form">
       <div class="column">
         <h2 class="ui   header">
 
           <div class="content">
-            Sign-in to your account
+            Sign-up for an account
           </div>
         </h2>
         <form class="ui large form">

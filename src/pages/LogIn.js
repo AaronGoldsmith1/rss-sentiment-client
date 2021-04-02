@@ -1,52 +1,97 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-const LogIn = () => {
-  return (
-    <div class="ui middle aligned center aligned grid">
-      <div class="column">
-        <h2 class="ui   header">
-          <div class="content">
+import '../auth.css'
+
+class LogIn extends Component {
+  constructor() {
+    super()
+      this.state = {
+        userName: '',
+        email: '',
+        password: ''
+    }
+  }
+ 
+
+  setUserName(e) {
+    this.setState({userName: e.target.value})
+    console.log(this.state)
+  }
+
+  setUserEmail(e) {
+    this.setState({email: e.target.value})
+    console.log(this.state)
+  }
+
+  setUserPassword(e) {
+    this.setState({password: e.target.value})
+    console.log(this.state)
+  }
+
+  handleSubmit(e) {
+    e.preventDefault()
+    console.log(this.state)
+  }
+
+
+
+
+  render() {
+    return (
+    <div className="ui middle aligned center aligned grid auth-form">
+      <div className="column">
+        <h2 className="ui header">
+          <div className="content">
             Log-in to your account
           </div>
         </h2>
-        <form class="ui large form">
-          <div class="ui stacked segment">
+        <form className="ui large form loginform" onSubmit={this.props.handleLogin}>
+          <div className="ui stacked segment">
 
-            <div class="field">
-              <div class="ui left icon input">
-                <i class="user icon"></i>
-                <input type="text" name="username" placeholder="User Name"/>
+            <div className="field">
+              <div className="ui left icon input">
+                <i className="user icon"></i>
+                <input type="text" 
+                name="username" 
+                placeholder="User Name"
+                onChange={(e) => this.setUserName(e)}
+                />
               </div>
             </div>
            
-            <div class="field">
-              <div class="ui left icon input">
-                <i class="at icon"></i>
-                <input type="text" name="email" placeholder="E-mail address"/>
+            <div className="field">
+              <div className="ui left icon input">
+                <i className="at icon"></i>
+                <input type="text" 
+                name="email" 
+                placeholder="E-mail address"
+                onChange={(e) => this.setUserEmail(e) }
+                />
               </div>
             </div>
             
-            <div class="field">
-              <div class="ui left icon input">
-                <i class="lock icon"></i>
-                <input type="password" name="password" placeholder="Password"/>
+            <div className="field">
+              <div className="ui left icon input">
+                <i className="lock icon"></i>
+                <input type="password" 
+                name="password" 
+                placeholder="Password"
+                onChange={(e) => this.setUserPassword(e) }
+                />
               </div>
             </div>
-       
-            <div class="ui fluid large teal submit button">Login</div>
+            <button type="submit" onClick={this.props.doLogin(this.state)} className="ui fluid large teal submit button">Login</button>
       </div>
-
-      <div class="ui error message"></div>
-
+      <div className="ui error message"></div>
     </form>
-
-    <div class="ui message">
+    <div className="ui message">
       New to us? <Link to={'/signup'} href="#">Sign Up</Link>
     </div>
   </div>
 </div>
   );
+  }
 };
 
 export default LogIn;
