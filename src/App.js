@@ -18,21 +18,14 @@ class App extends Component {
     }
 
     this.handleLogin = this.handleLogin.bind(this)
-    this.doLogin = this.doLogin.bind(this)
   }
   
 
-  handleLogin(e) {
+  handleLogin(e, userData) {
    e.preventDefault()
-   console.log('login clicked')
-
+   console.log('login clicked', userData)
   }
 
-  doLogin(userData) {
-    // this.setState({userCredentials: userData})
-    console.log('App Component UserData: ', userData)
-  }
-  
 
   render() {
     return (
@@ -41,7 +34,7 @@ class App extends Component {
          <Switch>
           <Route exact path='/' component={ Home }/>
           <Route exact path='/signup' component={ SignUp }/>
-          <Route exact path='/login' component={() => <LogIn handleLogin={this.handleLogin} doLogin={this.doLogin} /> } />
+          <Route exact path='/login' component={() => <LogIn handleLogin={this.handleLogin} /> } />
           <Route exact path='/data' component={ DataView }/>
           <Route exact path='/feeds' component={ FeedList }/>
         </Switch>

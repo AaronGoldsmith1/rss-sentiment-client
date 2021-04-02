@@ -46,7 +46,7 @@ class LogIn extends Component {
             Log-in to your account
           </div>
         </h2>
-        <form className="ui large form loginform" onSubmit={this.props.handleLogin}>
+        <form className="ui large form loginform" onSubmit={e => this.props.handleLogin(e, this.state)}>
           <div className="ui stacked segment">
 
             <div className="field">
@@ -81,7 +81,7 @@ class LogIn extends Component {
                 />
               </div>
             </div>
-            <button type="submit" onClick={this.props.doLogin(this.state)} className="ui fluid large teal submit button">Login</button>
+            <button type="submit" className="ui fluid large teal submit button">Login</button>
       </div>
       <div className="ui error message"></div>
     </form>
