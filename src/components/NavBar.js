@@ -16,11 +16,11 @@ const Header = (props) => {
       <div className="ui inverted vertical masthead center aligned segment">
         <div className="ui container">
           <div className="ui large inverted menu">
-            <Link to={'/'} className="active item">Home</Link>
+            <Link to={'/'} className={"item " + (props.location.pathname === '/' ? "active" : "")}>Home</Link>
             { props.currentUser &&
               <>
-            <Link to={'/feeds'} className="item">My Feeds</Link>
-            <Link to={'/data'} className="item">Data View</Link>
+            <Link to={'/feeds'} className={"item " + (props.location.pathname === '/feeds' ? "active" : "")}>My Feeds</Link>
+            <Link to={'/data'} className={"item " + (props.location.pathname === '/data' ? "active" : "")}>Data View</Link>
               </>
             }
             <div className="right item">
