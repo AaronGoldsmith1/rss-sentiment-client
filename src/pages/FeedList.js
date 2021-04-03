@@ -2,13 +2,40 @@ import axios from 'axios';
 import {Component} from 'react'
 import { withRouter } from 'react-router-dom';
 
+
+
+
 class FeedList extends Component {
   constructor(props) {
     super(props)
-    this.handleClick = this.handleClick.bind(this)
+
+    this.state = { feedToAdd: '' }
+    
+    this.viewFeedItems = this.viewFeedItems.bind(this)
+    this.handleChange = this.handleChange.bind(this)
+    this.addFeed = this.addFeed.bind(this)
+  }
+
+  handleChange(e) {
+    this.setState({ feedToAdd: e.target.value });
+  }
+
+  addFeed() {
+    console.log(this.state.feedToAdd)
+    // const data = {
+    //   userId: this.props.data._id,
+    //   feedUrl: this.state.feedToAdd
+    // }
+    // console.log(this.props.data)
+    // axios.post('http://localhost:4000/api/v1/feeds/', data, { headers: { 'Content-Type': 'application/json' }})
+    // .then((response) => {
+    //   console.log(response)
+    //   // window.location.reload()
+    // })
   }
   
-  handleClick(e) {
+  
+  viewFeedItems(e) {
     const feedId = e.target.dataset.id
 
     axios.get(`http://localhost:4000/api/v1/feeds/${feedId}`)
@@ -29,8 +56,8 @@ class FeedList extends Component {
         <h1 className="ui header">My RSS Feeds</h1>
 
         <div className="ui input">
-          <input type="text" placeholder="Add RSS Feed" />
-          <button className="ui button">Enter</button>
+          <input type="text" placeholder="Add RSS Feed" onChange={this.handleChange} />
+          <input value="Enter" type="button" className="ui button" onClick={this.addFeed} />
         </div>
         <div className="ui feed">
         { this.props.feeds.map((item, idx) => { 
@@ -39,7 +66,7 @@ class FeedList extends Component {
               { item.imageUrl ? <img src={item.imageUrl} alt="rss"/> : <i className="rss icon"></i> }
             </div>
             <div className="content">
-              <div data-id={item._id} onClick={this.handleClick} className="date">
+              <div data-id={item._id} onClick={this.viewFeedItems} className="date">
                 {item.feedUrl} - <i className="info circle icon"></i>
               </div>
               <div className="summary">
