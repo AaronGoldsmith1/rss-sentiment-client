@@ -1,55 +1,93 @@
-import React from 'react';
+import {Component} from 'react';
 import { Link } from 'react-router-dom';
 
 import '../auth.css'
 
-const SignUp = () => {
-  return (
-    <div class="ui middle aligned center aligned grid auth-form">
-      <div class="column">
-        <h2 class="ui   header">
+class SignUp extends Component {
+  constructor() {
+      super()
+        this.state = {
+          username: '',
+          email: '',
+          password: ''
+      }
+    }
 
-          <div class="content">
+  setUserName(e) {
+    this.setState({username: e.target.value})
+  }
+
+  setUserEmail(e) {
+    this.setState({email: e.target.value})
+  }
+
+  setUserPassword(e) {
+    this.setState({password: e.target.value})
+  }
+
+
+
+  render() {
+     return (
+    <div className="ui middle aligned center aligned grid auth-form">
+      <div className="column">
+        <h2 className="ui header">
+
+          <div className="content">
             Sign-up for an account
           </div>
         </h2>
-        <form class="ui large form">
-          <div class="ui stacked segment">
+        <form className="ui large form" onSubmit={e => this.props.handleSignup(e, this.state)}>
+          <div className="ui stacked segment">
 
-            <div class="field">
-              <div class="ui left icon input">
-                <i class="user icon"></i>
-                <input type="text" name="username" placeholder="User Name"/>
+            <div className="field">
+              <div className="ui left icon input">
+                <i className="user icon"></i>
+                <input type="text" 
+                name="username" 
+                placeholder="User Name"
+                onChange={(e) => this.setUserName(e)}
+                />
               </div>
             </div>
            
-            <div class="field">
-              <div class="ui left icon input">
-                <i class="at icon"></i>
-                <input type="text" name="email" placeholder="E-mail address"/>
+            <div className="field">
+              <div className="ui left icon input">
+                <i className="at icon"></i>
+                <input type="text" 
+                name="email" 
+                placeholder="E-mail address"
+                onChange={(e) => this.setUserEmail(e) }
+                />
               </div>
             </div>
             
-            <div class="field">
-              <div class="ui left icon input">
-                <i class="lock icon"></i>
-                <input type="password" name="password" placeholder="Password"/>
+            <div className="field">
+              <div className="ui left icon input">
+                <i className="lock icon"></i>
+                <input type="password" 
+                name="password" 
+                placeholder="Password"
+                onChange={(e) => this.setUserPassword(e) }
+                />
               </div>
             </div>
        
-            <div class="ui fluid large teal submit button">Sign Up</div>
+            <button type="submit" className="ui fluid large teal submit button">Sign Up</button>
       </div>
 
-      <div class="ui error message"></div>
+      <div className="ui error message"></div>
 
     </form>
 
-    <div class="ui message">
+    <div className="ui message">
       Have an account? <Link to={'/login'} href="#">Log In</Link>
     </div>
   </div>
 </div>
   );
+  }
+ 
 };
 
 export default SignUp;

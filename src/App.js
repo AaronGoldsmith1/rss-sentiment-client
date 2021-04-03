@@ -19,6 +19,7 @@ class App extends Component {
     }
 
     this.handleLogin = this.handleLogin.bind(this)
+    this.handleSignup = this.handleSignup.bind(this)
   }
   
 
@@ -35,6 +36,19 @@ class App extends Component {
     this.props.history.push('/feeds')
   }
 
+  handleSignup(e, userData) {
+    e.preventDefault()
+    axios.post('http://localhost:4000/api/v1/auth/register', userData, { headers: { 'Content-Type': 'application/json' }})
+    .then((response) => {
+      console.log(response.data.createdUser)
+      this.setState({currentUser: response.data.createdUser}, () => {
+        localStorage.setItem('currentUser', JSON.stringify(this.state.currentUser))
+      })
+    })
+    this.props.history.push('/feeds')
+
+  }
+
 
   render() {
     return (
@@ -42,7 +56,7 @@ class App extends Component {
         <NavBar currentUser={this.state.currentUser} />
          <Switch>
           <Route exact path='/' component={ Home }/>
-          <Route exact path='/signup' component={ SignUp }/>
+          <Route exact path='/signup' component={() => <SignUp handleSignup={this.handleSignup} /> } />
           <Route exact path='/login' component={() => <LogIn handleLogin={this.handleLogin} /> } />
           <Route exact path='/feeds' component={() => <FeedList feeds={this.state.currentUser ? this.state.currentUser.feeds : []} /> } />
           <Route exact path='/data' component={ DataView }/>
