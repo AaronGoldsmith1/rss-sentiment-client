@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
+import { Switch, Route, withRouter } from 'react-router-dom';
+
 import NavBar from './components/NavBar';
 
-import { Switch, Route, withRouter } from 'react-router-dom';
 import Home from './pages/Home';
 import SignUp from './pages/SignUp';
 import LogIn from './pages/LogIn';
 import DataView from './pages/DataView';
 import FeedList from './pages/FeedList';
 import FeedDetail from './pages/FeedDetail';
-
 
 import axios from 'axios';
 
@@ -30,7 +30,6 @@ class App extends Component {
    
    axios.post('http://localhost:4000/api/v1/auth/login', userData, { headers: { 'Content-Type': 'application/json' }})
     .then((response) => {
-      console.log(response)
       this.setState({currentUser: response.data.user}, () => {
         localStorage.setItem('currentUser', JSON.stringify(this.state.currentUser))
       })
@@ -42,7 +41,7 @@ class App extends Component {
     e.preventDefault()
     axios.post('http://localhost:4000/api/v1/auth/register', userData, { headers: { 'Content-Type': 'application/json' }})
     .then((response) => {
-      console.log(response.data.createdUser)
+
       this.setState({currentUser: response.data.createdUser}, () => {
         localStorage.setItem('currentUser', JSON.stringify(this.state.currentUser))
       })
@@ -57,7 +56,7 @@ class App extends Component {
       <div>
         <NavBar currentUser={this.state.currentUser} />
          <Switch>
-          <Route exact path='/' component={ Home }/>
+          <Route exact path='/' component={() => <Home homePath={this.state.currentUser ? '/feeds' : '/login' } /> }/>
           <Route exact path='/signup' component={() => <SignUp handleSignup={this.handleSignup} /> } />
           <Route exact path='/login' component={() => <LogIn handleLogin={this.handleLogin} /> } />
           <Route exact path='/feeds' component={() => <FeedList feeds={this.state.currentUser ? this.state.currentUser.feeds : []} /> } />

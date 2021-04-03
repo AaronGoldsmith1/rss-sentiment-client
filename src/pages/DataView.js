@@ -34,7 +34,7 @@ export default class DataView extends Component {
 
 		for (let key in parsedData) {
 			for (let i = 0; i < parsedData[key].length; i++) {
-				console.log(parsedData[key][i].label =  titles[i])
+				parsedData[key][i].label = titles[i]
 			}
 		}
 

@@ -13,7 +13,6 @@ class FeedList extends Component {
 
     axios.get(`http://localhost:4000/api/v1/feeds/${feedId}`)
       .then((response) => {
-        console.log(response.data.data)
        this.props.history.push({
          pathname: '/feeds/detail',
          state: { 
@@ -25,7 +24,6 @@ class FeedList extends Component {
   }
 
   render() {
-    console.log(this.props.feeds)
     return (
       <div className="ui main text container">
         <h1 className="ui header">My RSS Feeds</h1>
@@ -47,7 +45,7 @@ class FeedList extends Component {
               <div className="summary">
                 {item.title} - {item.description}
               </div>
-          </div>
+            </div>
         </div>
       })
     }
