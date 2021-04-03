@@ -15,7 +15,7 @@ class App extends Component {
   constructor(){
     super()
     this.state = {
-      currentUser: null,
+      currentUser: JSON.parse(localStorage.getItem('currentUser')) || null,
     }
 
     this.handleLogin = this.handleLogin.bind(this)
@@ -28,10 +28,12 @@ class App extends Component {
   //  this.setState({userCredentials: userData}) //dont need this
    
    axios.post('http://localhost:4000/api/v1/auth/login', userData, { headers: { 'Content-Type': 'application/json' }})
-      .then((response) => {
-        console.log(response)
-        this.setState({currentUser: response.data.user})
+    .then((response) => {
+      console.log(response)
+      this.setState({currentUser: response.data.user}, () => {
+        localStorage.setItem('currentUser', JSON.stringify(this.state.currentUser))
       })
+    })
   }
 
 

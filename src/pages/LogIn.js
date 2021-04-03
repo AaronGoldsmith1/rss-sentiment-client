@@ -12,7 +12,6 @@ class LogIn extends Component {
         password: ''
     }
   }
- 
 
   setUserName(e) {
     this.setState({username: e.target.value})

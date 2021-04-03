@@ -1,7 +1,6 @@
 import {Component} from 'react'
 
 export default class FeedList extends Component {
-  
   render() {
     console.log(this.props.feeds)
     return (
