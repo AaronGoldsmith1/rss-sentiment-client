@@ -22,16 +22,16 @@ class FeedList extends Component {
 
   addFeed() {
     console.log(this.props.user._id)
-    // const data = {
-    //   userId: this.props.data._id,
-    //   feedUrl: this.state.feedToAdd
-    // }
-    // console.log(this.props.data)
-    // axios.post('http://localhost:4000/api/v1/feeds/', data, { headers: { 'Content-Type': 'application/json' }})
-    // .then((response) => {
-    //   console.log(response)
-    //   // window.location.reload()
-    // })
+    const data = {
+      userId: this.props.user._id,
+      feedUrl: this.state.feedToAdd
+    }
+    console.log(this.props.data)
+    axios.post('http://localhost:4000/api/v1/feeds/', data, { headers: { 'Content-Type': 'application/json' }})
+    .then((response) => {
+      console.log(response)
+      // window.location.reload()
+    })
   }
   
   

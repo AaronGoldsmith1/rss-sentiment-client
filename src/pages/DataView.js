@@ -3,7 +3,7 @@ import {Component} from 'react'
 import './DataView.css'
 
 import {CanvasJSChart} from 'canvasjs-react-charts'
-import { parse } from 'uuid'
+
 
 export default class DataView extends Component {
   precentages = {
