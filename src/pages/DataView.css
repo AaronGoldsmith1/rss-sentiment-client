@@ -1,0 +1,11 @@
+.canvasjs-chart-canvas {
+  z-index: 1;
+}
+
+.watermark-cover {
+  background-color: white;
+  padding: 35px;
+  position: relative;
+  top: 16px;
+  z-index: 1;
+}
