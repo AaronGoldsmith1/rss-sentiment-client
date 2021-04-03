@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import NavBar from './components/NavBar';
 
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route, withRouter } from 'react-router-dom';
 import Home from './pages/Home';
 import SignUp from './pages/SignUp';
 import LogIn from './pages/LogIn';
@@ -24,8 +24,6 @@ class App extends Component {
 
   handleLogin(e, userData) {
    e.preventDefault()
-   console.log('login clicked', userData)
-  //  this.setState({userCredentials: userData}) //dont need this
    
    axios.post('http://localhost:4000/api/v1/auth/login', userData, { headers: { 'Content-Type': 'application/json' }})
     .then((response) => {
@@ -34,6 +32,7 @@ class App extends Component {
         localStorage.setItem('currentUser', JSON.stringify(this.state.currentUser))
       })
     })
+    this.props.history.push('/')
   }
 
 
@@ -53,4 +52,4 @@ class App extends Component {
   }
 };
 
-export default App;
+export default withRouter(App);

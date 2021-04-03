@@ -1,10 +1,15 @@
 
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 import './NavBar.css'
 
 const Header = (props) => {
+  function handleLogout() {
+    localStorage.removeItem('currentUser')
+    props.history.push('/')
+  }
+
   return (
     <>
       <div className="ui inverted vertical masthead center aligned segment">
@@ -24,7 +29,7 @@ const Header = (props) => {
               <Link to={'/signup'} className="ui inverted button">Sign Up</Link>
               </>
               :
-              <Link to={'/'} className="ui inverted button">Log Out</Link>
+              <Link to={'/'} onClick={handleLogout} className="ui inverted button">Log Out</Link>
             }
 
             </div>
@@ -35,4 +40,4 @@ const Header = (props) => {
   );
 };
 
-export default Header;
+export default withRouter(Header);
