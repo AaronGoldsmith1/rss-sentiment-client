@@ -25,14 +25,14 @@ class FeedList extends Component {
 
   addFeed() {
     console.log(this.props.user._id)
+    console.log(this.state.feedToAdd)
     const data = {
       userId: this.props.user._id,
       feedUrl: this.state.feedToAdd
     }
-    console.log(this.props.data)
     axios.post('http://localhost:4000/api/v1/feeds/', data, { headers: { 'Content-Type': 'application/json' }})
     .then((response) => {
-      console.log(response)
+      console.log(response.data.user)
        this.setState({currentUser: response.data.user}, () => {
         localStorage.setItem('currentUser', JSON.stringify(this.state.currentUser))
       })
@@ -65,7 +65,7 @@ class FeedList extends Component {
           <input value="Enter" type="button" className="ui button" onClick={this.addFeed} />
         </div>
         <div className="ui feed">
-        { this.state.currentUser.feeds.map((item, idx) => { 
+        { this.state.currentUser.feeds ? this.state.currentUser.feeds.map((item, idx) => { 
         return <div key={idx} className="event">
             <div className="label">
               { item.imageUrl ? <img src={item.imageUrl} alt="rss"/> : <i className="rss icon"></i> }
@@ -80,7 +80,7 @@ class FeedList extends Component {
             </div>
         </div>
       })
-    }
+   : <h3>No Feeds</h3> }
     </div>
   </div>
     )
