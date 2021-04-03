@@ -8,6 +8,7 @@ const Header = (props) => {
   function handleLogout() {
     localStorage.removeItem('currentUser')
     props.history.push('/')
+    window.location.reload()
   }
 
   return (

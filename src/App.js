@@ -32,7 +32,7 @@ class App extends Component {
         localStorage.setItem('currentUser', JSON.stringify(this.state.currentUser))
       })
     })
-    this.props.history.push('/')
+    this.props.history.push('/feeds')
   }
 
 
