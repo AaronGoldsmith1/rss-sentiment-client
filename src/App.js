@@ -47,6 +47,7 @@ class App extends Component {
           <Route exact path='/feeds' component={() => <FeedList feeds={this.state.currentUser ? this.state.currentUser.feeds : []} /> } />
           <Route exact path='/data' component={ DataView }/>
         </Switch>
+        
       </div>
     );
   }
