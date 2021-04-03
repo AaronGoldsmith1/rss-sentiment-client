@@ -2,6 +2,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import './NavBar.css'
+
 const Header = (props) => {
   return (
     <>
@@ -18,7 +20,7 @@ const Header = (props) => {
             <div className="right item">
             { !props.currentUser ?
               <>
-              <Link to={'/login'} className="ui inverted button">Log in</Link>
+              <Link to={'/login'} className="ui inverted button login-button">Log in</Link>
               <Link to={'/signup'} className="ui inverted button">Sign Up</Link>
               </>
               :

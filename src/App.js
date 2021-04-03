@@ -43,8 +43,8 @@ class App extends Component {
           <Route exact path='/' component={ Home }/>
           <Route exact path='/signup' component={ SignUp }/>
           <Route exact path='/login' component={() => <LogIn handleLogin={this.handleLogin} /> } />
+          <Route exact path='/feeds' component={() => <FeedList feeds={this.state.currentUser ? this.state.currentUser.feeds : []} /> } />
           <Route exact path='/data' component={ DataView }/>
-          <Route exact path='/feeds' component={ FeedList }/>
         </Switch>
       </div>
     );
