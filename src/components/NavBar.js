@@ -32,7 +32,6 @@ const Header = (props) => {
               :
               <Link to={'/'} onClick={handleLogout} className="ui inverted button">Log Out</Link>
             }
-
             </div>
           </div>
         </div>
