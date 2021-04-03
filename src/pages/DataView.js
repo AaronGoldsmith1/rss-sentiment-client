@@ -3,6 +3,7 @@ import {Component} from 'react'
 import './DataView.css'
 
 import {CanvasJSChart} from 'canvasjs-react-charts'
+import { parse } from 'uuid'
 
 export default class DataView extends Component {
   precentages = {
@@ -13,22 +14,32 @@ export default class DataView extends Component {
     veryPositive: []
   }
   
-
+  
   
 
   
   render() {
+		const titles = []
+		this.props.data.forEach(feed => titles.push(feed.title))
     const parsedData = this.props.data.reduce((acc, val) => {
 			for (let key in val.chartData) {
 			
 				let title = val.chartData.title
 				delete val.chartData.title
-				console.log(title)
 				acc[key].push({label: title, y: val.chartData[key] })
 			}
 			return acc
 		}, this.precentages)
-    console.log(this.precentages)
+   
+
+		for (let key in parsedData) {
+			for (let i = 0; i < parsedData[key].length; i++) {
+				console.log(parsedData[key][i].label =  titles[i])
+			}
+		}
+
+		console.log(parsedData)
+
 		const options = {
 			animationEnabled: true,
 			title: {
@@ -58,18 +69,7 @@ export default class DataView extends Component {
 				indexLabel: false,
 				indexLabelFontColor: "white",
 				yValueFormatString: "#,###'%'",
-				dataPoints: [
-					{ label: 'Ars Technica',   y: 15 },
-					{ label: 'TechCrunch',   y: 79 },
-					{ label: "Psyhcology",   y: 77 },
-					{ label: 'American Chemical Society...',   y: 68 },
-					{ label: 'Reddit’s r/worldnews',   y: 63 },
-					{ label: 'Entrepreneur',   y: 61 },
-					{ label: 'Signal v. Noise – Medium',   y: 59 },
-					{ label: 'NYT - Home Page',   y: 49 },
-					{ label: 'BBC News – Home',   y: 49 },
-					{ label: 'Engadget RSS Feed',   y: 18 }
-				]
+				dataPoints: parsedData.veryPositive.reverse()
 			},{
 				type: "stackedBar100",
 				color: "#9bbb59",
@@ -78,18 +78,7 @@ export default class DataView extends Component {
 				indexLabel: false,
 				indexLabelFontColor: "white",
 				yValueFormatString: "#,###'%'",
-				dataPoints: [
-					{ label: 'Ars Technica',   y: 15 },
-					{ label: 'TechCrunch',   y: 79 },
-					{ label: "Psyhcology",   y: 77 },
-					{ label: 'American Chemical Society...',   y: 68 },
-					{ label: 'Reddit’s r/worldnews',   y: 63 },
-					{ label: 'Entrepreneur',   y: 61 },
-					{ label: 'Signal v. Noise – Medium',   y: 59 },
-					{ label: 'NYT - Home Page',   y: 49 },
-					{ label: 'BBC News – Home',   y: 49 },
-					{ label: 'Engadget RSS Feed',   y: 18 }
-				]
+				dataPoints: parsedData.slightlyPositive.reverse()
 			},{
 				type: "stackedBar100",
 				color: "#7f7f7f",
@@ -98,18 +87,7 @@ export default class DataView extends Component {
 				indexLabel: false,
 				indexLabelFontColor: "white",
 				yValueFormatString: "#,###'%'",
-				dataPoints: [
-					{ label: 'Ars Technica',   y: 80 },
-					{ label: 'TechCrunch',   y: 11 },
-					{ label: 'Reuters: Business News',   y: 13 },
-					{ label: 'American Chemical Society...',   y: 22 },
-					{ label: 'Reddit’s r/worldnews',   y: 17 },
-					{ label: 'Entrepreneur',   y: 29 },
-					{ label: 'Signal v. Noise – Medium',   y: 21 },
-					{ label: 'NYT - Home Page',   y: 31 },
-					{ label: 'BBC News – Home',   y: 11 },
-					{ label: 'Engadget RSS Feed',   y: 42 }
-				]
+				dataPoints: parsedData.neutral.reverse()
 			},{
 				type: "stackedBar100",
 				color: "#76BED0",
@@ -118,18 +96,7 @@ export default class DataView extends Component {
 				indexLabel: false,
 				indexLabelFontColor: "white",
 				yValueFormatString: "#,###'%'",
-				dataPoints: [
-					{ label: 'Ars Technica',   y: 80 },
-					{ label: 'TechCrunch',   y: 11 },
-					{ label: 'Reuters: Business News',   y: 13 },
-					{ label: 'American Chemical Society...',   y: 22 },
-					{ label: 'Reddit’s r/worldnews',   y: 17 },
-					{ label: 'Entrepreneur',   y: 29 },
-					{ label: 'Signal v. Noise – Medium',   y: 21 },
-					{ label: 'NYT - Home Page',   y: 31 },
-					{ label: 'BBC News – Home',   y: 11 },
-					{ label: 'Engadget RSS Feed',   y: 42 }
-				]
+				dataPoints: parsedData.slightlyNegative.reverse()
 			},{
 				type: "stackedBar100",
 				color: "black",
@@ -138,18 +105,7 @@ export default class DataView extends Component {
 				indexLabel: false,
 				indexLabelFontColor: "white",
 				yValueFormatString: "#,###'%'",
-				dataPoints: [
-					{ label: 'Ars Technica',   y: 0 },
-					{ label: 'TechCrunch',   y: 10 },
-					{ label: 'Reuters: Business News',   y: 3 },
-					{ label: 'American Chemical Society...',   y: 10 },
-					{ label: 'Reddit’s r/worldnews',   y: 20 },
-					{ label: 'Entrepreneur',   y: 10 },
-					{ label: 'Signal v. Noise – Medium',   y: 20 },
-					{ label: 'NYT - Home Page',   y: 20 },
-					{ label: 'BBC News – Home',   y: 40 },
-					{ label: 'Engadget RSS Feed',   y: 20 }
-				]
+				dataPoints: parsedData.veryNegative.reverse()
 			}
 		]
 		}
