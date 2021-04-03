@@ -1,12 +1,11 @@
 import {Component} from 'react'
 
 import uuid from 'uuid';
+import moment from 'moment';
 
 export default class FeedDetail extends Component {
   feedItems = this.props.location.state.items;
   render() {
-    console.log('FEED DETAIL: ', this.props.location.state.items)
-   
     return (
         <>
     <h1>Feed Items</h1>
@@ -18,7 +17,7 @@ export default class FeedDetail extends Component {
         <div className="content">
           <a href={item.link}><span className="header">{item.title}</span></a>
        
-          <div className="">{item.date}</div>
+          <div className="">{moment(item.date).format('LLL')}</div>
         </div>
         </div>
       })}
