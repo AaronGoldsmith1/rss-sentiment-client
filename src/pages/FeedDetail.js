@@ -5,10 +5,11 @@ import moment from 'moment';
 
 export default class FeedDetail extends Component {
   feedItems = this.props.location.state.items;
+  title = this.props.location.state.title
   render() {
     return (
         <>
-    <h1>Feed Items</h1>
+    <h1>{this.title} - Feed Items</h1>
     
     <div className="five wide column">
       <div className="ui relaxed divided list">

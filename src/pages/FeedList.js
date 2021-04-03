@@ -13,10 +13,13 @@ class FeedList extends Component {
 
     axios.get(`http://localhost:4000/api/v1/feeds/${feedId}`)
       .then((response) => {
-        console.log(response.data.data.items)
+        console.log(response.data.data)
        this.props.history.push({
          pathname: '/feeds/detail',
-         state: { items: response.data.data.items }
+         state: { 
+          title: response.data.data.title,
+          items: response.data.data.items 
+          }
         })
       })
   }
@@ -25,12 +28,17 @@ class FeedList extends Component {
     console.log(this.props.feeds)
     return (
       <div className="ui main text container">
-        <h1 className="ui header center">My RSS Feeds</h1>
+        <h1 className="ui header">My RSS Feeds</h1>
+
+        <div className="ui input">
+          <input type="text" placeholder="Add RSS Feed" />
+          <button className="ui button">Enter</button>
+        </div>
         <div className="ui feed">
         { this.props.feeds.map((item, idx) => { 
         return <div key={idx} className="event">
             <div className="label">
-              <img src={item.imageUrl} alt="rss"/>
+              { item.imageUrl ? <img src={item.imageUrl} alt="rss"/> : <i className="rss icon"></i> }
             </div>
             <div className="content">
               <div data-id={item._id} onClick={this.handleClick} className="date">
