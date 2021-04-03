@@ -9,7 +9,10 @@ class FeedList extends Component {
   constructor(props) {
     super(props)
 
-    this.state = { feedToAdd: '' }
+    this.state = { 
+      currentUser: this.props.user,
+      feedToAdd: '' 
+    }
     
     this.viewFeedItems = this.viewFeedItems.bind(this)
     this.handleChange = this.handleChange.bind(this)
@@ -18,7 +21,7 @@ class FeedList extends Component {
 
   handleChange(e) {
     this.setState({ feedToAdd: e.target.value });
-  }
+  } 
 
   addFeed() {
     console.log(this.props.user._id)
@@ -30,7 +33,9 @@ class FeedList extends Component {
     axios.post('http://localhost:4000/api/v1/feeds/', data, { headers: { 'Content-Type': 'application/json' }})
     .then((response) => {
       console.log(response)
-      // window.location.reload()
+       this.setState({currentUser: response.data.user}, () => {
+        localStorage.setItem('currentUser', JSON.stringify(this.state.currentUser))
+      })
     })
   }
   
@@ -60,7 +65,7 @@ class FeedList extends Component {
           <input value="Enter" type="button" className="ui button" onClick={this.addFeed} />
         </div>
         <div className="ui feed">
-        { this.props.user.feeds.map((item, idx) => { 
+        { this.state.currentUser.feeds.map((item, idx) => { 
         return <div key={idx} className="event">
             <div className="label">
               { item.imageUrl ? <img src={item.imageUrl} alt="rss"/> : <i className="rss icon"></i> }
