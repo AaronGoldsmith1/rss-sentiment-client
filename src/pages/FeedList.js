@@ -21,7 +21,7 @@ class FeedList extends Component {
   }
 
   addFeed() {
-    console.log(this.state.feedToAdd)
+    console.log(this.props.user._id)
     // const data = {
     //   userId: this.props.data._id,
     //   feedUrl: this.state.feedToAdd
@@ -60,7 +60,7 @@ class FeedList extends Component {
           <input value="Enter" type="button" className="ui button" onClick={this.addFeed} />
         </div>
         <div className="ui feed">
-        { this.props.feeds.map((item, idx) => { 
+        { this.props.user.feeds.map((item, idx) => { 
         return <div key={idx} className="event">
             <div className="label">
               { item.imageUrl ? <img src={item.imageUrl} alt="rss"/> : <i className="rss icon"></i> }
