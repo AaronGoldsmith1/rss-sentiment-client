@@ -6,6 +6,8 @@ import { Button, Header, Modal, Icon } from 'semantic-ui-react'
 
 import './FeedList.css'
 
+import SuggestedFeeds from '../components/SuggestedFeeds';
+
 class FeedList extends Component {
   constructor(props) {
     super(props)
@@ -144,7 +146,7 @@ class FeedList extends Component {
           <input value="Enter" type="button" className="ui button" onClick={this.addFeed} />
         </div>
         <div className="ui feed">
-        { this.state.currentUser.feeds ? this.state.currentUser.feeds.map((item, idx) => { 
+        { this.state.currentUser.feeds.length ? this.state.currentUser.feeds.map((item, idx) => { 
         return <div key={idx} className="event">
             <div className="label">
               { item.imageUrl ? <img src={item.imageUrl} alt="rss"/> : <i className="rss icon"></i> }
@@ -162,7 +164,12 @@ class FeedList extends Component {
             </div>
         </div>
       })
-   : <h3>No Feeds</h3> }
+   : 
+  
+      
+  <SuggestedFeeds currentUser={this.state.currentUser} addFeed={this.addFeed} />
+  
+  }
     </div>
   </div>
   </>
