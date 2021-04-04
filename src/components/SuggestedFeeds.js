@@ -46,45 +46,41 @@ class SuggestedFeeds extends Component {
     window.location.reload()
   }
   
-  
   render() {
+    return (
+      <Modal
+        open={this.state.open}
+        onClose={() => this.setState({open: false})}
+        onOpen={() => this.setState({open: true})}
+        trigger={<Button>Please Select RSS Feeds</Button>}
+      >
+        <Modal.Header>Please Select Some RSS Feeds</Modal.Header>
+        <Modal.Content scrolling>
 
-  return (
-    <Modal
-      open={this.state.open}
-      onClose={() => this.setState({open: false})}
-      onOpen={() => this.setState({open: true})}
-      trigger={<Button>Please Select RSS Feeds</Button>}
-    >
-      <Modal.Header>Please Select Some RSS Feeds</Modal.Header>
-      <Modal.Content scrolling>
-
-        <Modal.Description>
-          <Transition.Group
-          as={List}
-          duration={500}
-          divided
-          size='huge'
-          verticalAlign='middle'
-        >
-          {this.state.feeds.map((feed, idx) => (
-            <List.Item key={idx}>
-              
-              <List.Content header={feed.linkText} />
-              {feed.linkUrl} <Button onClick={() => this.handleAdd(feed.linkUrl, idx)}>+</Button>
-            </List.Item>
-          ))}
-        </Transition.Group>
-        </Modal.Description>
-      </Modal.Content>
-      <Modal.Actions>
-        <Button primary onClick={() => this.handleSubmit()} >
-          Proceed <Icon name='chevron right' />
-        </Button>
-      </Modal.Actions>
-    </Modal>
-  )
-          }
+          <Modal.Description>
+            <List
+            divided
+            size='huge'
+            verticalAlign='middle'
+          >
+            {this.state.feeds.map((feed, idx) => (
+              <List.Item key={idx}>
+                
+                <List.Content header={feed.linkText} />
+                {feed.linkUrl} <Button onClick={() => this.handleAdd(feed.linkUrl, idx)}>+</Button>
+              </List.Item>
+            ))}
+          </List>
+          </Modal.Description>
+        </Modal.Content>
+        <Modal.Actions>
+          <Button primary onClick={() => this.handleSubmit()} >
+            Proceed <Icon name='chevron right' />
+          </Button>
+        </Modal.Actions>
+      </Modal>
+    )
+  }
 }
 
 export default SuggestedFeeds

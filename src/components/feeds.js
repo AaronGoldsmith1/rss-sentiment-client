@@ -252,10 +252,6 @@
     linkUrl: 'https://www.reddit.com/r/AskCulinary/.rss',
   },
   {
-    linkText: 'BuzzFeed – Tasty',
-    linkUrl: 'https://www.buzzfeed.com/tasty.xml',
-  },
-  {
     linkText: 'Martin Fowler',
     linkUrl: 'https://martinfowler.com/feed.atom',
   }
