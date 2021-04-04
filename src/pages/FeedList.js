@@ -60,9 +60,22 @@ class FeedList extends Component {
     document.getElementById('new-feed').value = ''
   }
   
-  updateFeed(item) {
-    this.setState({modalOpen: false})
-    console.log(this.state.filterStrength)
+  updateFeed() {
+    const data = {
+      filterStrength: this.state.filterStrength || this.feedToUpdate.filterStrength,
+      feedId: this.state.feedToUpdate._id,
+      userId: this.props.user._id
+    }
+    console.log(data)
+    axios.put('http://localhost:4000/api/v1/feeds/update', data, { headers: { 'Content-Type': 'application/json' }})
+    .then((response) => {
+      console.log(response.data.data.user)
+      this.setState({currentUser: response.data.data.user, modalOpen: false, filterStrength: ''}, () => {
+        localStorage.setItem('currentUser', JSON.stringify(this.state.currentUser))
+      })
+    })
+  
+   
   }
   
   viewFeedItems(e) {
@@ -102,13 +115,13 @@ class FeedList extends Component {
             <Header>Adjust Sentiment Filter Strength </Header>
             <h5>Feed: {this.state.feedToUpdate.title}</h5>
             
-            <h5>Filter Strength: {this.state.filterStrength}</h5>
+            <h5>Filter Strength: {this.state.filterStrength ? this.state.filterStrength : this.state.feedToUpdate.filterStrength }</h5>
               <i size="huge" className="frown outline icon filter-icons"></i>
             <div className="ui buttons">  
-              <button onClick={() => this.setState({filterStrength: 0})} className={this.state.feedToUpdate.filterStrength === 0 ? 'ui button disabled' : 'ui button'}>0</button>
-              <button onClick={() => this.setState({filterStrength: 1})} className={this.state.feedToUpdate.filterStrength === 1 ? 'ui button disabled' : 'ui button'}>1</button>
-              <button onClick={() => this.setState({filterStrength: 2})} className={this.state.feedToUpdate.filterStrength === 2 ? 'ui button disabled' : 'ui button'}>2</button>
-              <button onClick={() => this.setState({filterStrength: 3})} className={this.state.feedToUpdate.filterStrength === 3 ? 'ui button disabled' : 'ui button'}>3</button>
+              <button className="ui button" onClick={() => this.setState({filterStrength: 0})}>0</button>
+              <button className="ui button" onClick={() => this.setState({filterStrength: 1})}>1</button>
+              <button className="ui button" onClick={() => this.setState({filterStrength: 2})}>2</button>
+              <button className="ui button" onClick={() => this.setState({filterStrength: 3})}>3</button>
             </div>
               <i size="huge" className="smile outline icon filter-icons"></i>
             </Modal.Description>
