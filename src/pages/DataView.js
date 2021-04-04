@@ -46,27 +46,27 @@ export default class DataView extends Component {
 			theme: 'dark1', //“light1″,”light2”, “dark1”, “dark2”
 			title: {
 				text: "RSS Feed Items Sentiment Polarity",
-				// fontFamily: 'Lato'
+				fontFamily: 'Lato'
 			},
 			toolTip: {
 				shared: true,
-        // fontFamily: 'Lato'
+        fontFamily: 'Lato'
 			},
 			legend: {
 				verticalAlign: "top",
-				// fontFamily: 'Lato'
+				fontFamily: 'Lato'
 			},
 			axisY: {
 				interval: 10,
 				suffix: "%",
-				
+				labelFontFamily: 'Lato'
 			},
 			axisX : { 
 				labelMaxWidth: 240,
 				labelAutoFit: true,
 				labelWrap: true,
 				labelTextAlign: 'center',
-				
+				labelFontFamily: 'Lato'
          },
 			data: [{
 				type: "stackedBar100",
