@@ -81,13 +81,15 @@ class FeedList extends Component {
   viewFeedItems(e) {
     const feedId = e.target.dataset.id
 
-    axios.get(`http://localhost:4000/api/v1/feeds/${feedId}`)
+    const filterStrength = this.state.currentUser.feeds.filter(feed => feed._id === feedId)[0].filterStrength
+
+    axios.get(`http://localhost:4000/api/v1/feeds/${feedId}/${filterStrength}`)
       .then((response) => {
        this.props.history.push({
          pathname: '/feeds/detail',
          state: { 
           title: response.data.data.title,
-          items: response.data.data.items 
+          items: response.data.data.items,
           }
         })
       })
