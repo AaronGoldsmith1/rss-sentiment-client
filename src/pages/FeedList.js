@@ -14,13 +14,15 @@ class FeedList extends Component {
       modalOpen: false,
       currentUser: this.props.user,
       feedToAdd: '',
-      feedToUpdate: ''
+      feedToUpdate: '',
+      filterStrength: '',
     }
     
     this.viewFeedItems = this.viewFeedItems.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.addFeed = this.addFeed.bind(this)
     this.deleteFeed = this.deleteFeed.bind(this)
+    this.updateFeed = this.updateFeed.bind(this)
     this.toggleModal = this.toggleModal.bind(this)
   }
 
@@ -58,6 +60,10 @@ class FeedList extends Component {
     document.getElementById('new-feed').value = ''
   }
   
+  updateFeed(item) {
+    this.setState({modalOpen: false})
+    console.log(this.state.filterStrength)
+  }
   
   viewFeedItems(e) {
     const feedId = e.target.dataset.id
@@ -81,10 +87,9 @@ class FeedList extends Component {
   }
 
   render() {
+
     return (
       <>
-    
-      
        <Modal
           onClose={() => this.setState({modalOpen: false})}
           onOpen={() => this.setState({modalOpen: true})}
@@ -97,14 +102,14 @@ class FeedList extends Component {
             <Header>Adjust Sentiment Filter Strength </Header>
             <h5>Feed: {this.state.feedToUpdate.title}</h5>
             
-            <h5>Filter Strength: {this.state.feedToUpdate.filterStrength}</h5>
+            <h5>Filter Strength: {this.state.filterStrength}</h5>
               <i size="huge" className="frown outline icon filter-icons"></i>
-            <Button.Group size='large'>  
-              <Button disabled>0</Button>
-              <Button>1</Button>
-              <Button>2</Button>
-              <Button>3</Button>
-            </Button.Group>
+            <div className="ui buttons">  
+              <button onClick={() => this.setState({filterStrength: 0})} className={this.state.feedToUpdate.filterStrength === 0 ? 'ui button disabled' : 'ui button'}>0</button>
+              <button onClick={() => this.setState({filterStrength: 1})} className={this.state.feedToUpdate.filterStrength === 1 ? 'ui button disabled' : 'ui button'}>1</button>
+              <button onClick={() => this.setState({filterStrength: 2})} className={this.state.feedToUpdate.filterStrength === 2 ? 'ui button disabled' : 'ui button'}>2</button>
+              <button onClick={() => this.setState({filterStrength: 3})} className={this.state.feedToUpdate.filterStrength === 3 ? 'ui button disabled' : 'ui button'}>3</button>
+            </div>
               <i size="huge" className="smile outline icon filter-icons"></i>
             </Modal.Description>
             </Modal.Content>
@@ -112,7 +117,7 @@ class FeedList extends Component {
           <Button color='black' onClick={() => this.setState({modalOpen: false})}>Cancel</Button>
         <Button
           content="Submit"
-          onClick={() => this.setState({modalOpen: false})}
+          onClick={() => this.updateFeed(this.state.feedToUpdate)}
           positive
         />
           </Modal.Actions>
