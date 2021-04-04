@@ -2,14 +2,14 @@ import axios from 'axios';
 import {Component} from 'react'
 import { withRouter } from 'react-router-dom';
 
-
-
+import { Button, Header, Modal, Icon } from 'semantic-ui-react'
 
 class FeedList extends Component {
   constructor(props) {
     super(props)
 
     this.state = { 
+      modalOpen: false,
       currentUser: this.props.user,
       feedToAdd: '' 
     }
@@ -17,6 +17,7 @@ class FeedList extends Component {
     this.viewFeedItems = this.viewFeedItems.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.addFeed = this.addFeed.bind(this)
+    this.toggleModal = this.toggleModal.bind(this)
   }
 
   handleChange(e) {
@@ -24,19 +25,17 @@ class FeedList extends Component {
   } 
 
   addFeed() {
-    console.log(this.props.user._id)
-    console.log(this.state.feedToAdd)
     const data = {
       userId: this.props.user._id,
       feedUrl: this.state.feedToAdd
     }
     axios.post('http://localhost:4000/api/v1/feeds/', data, { headers: { 'Content-Type': 'application/json' }})
     .then((response) => {
-      console.log(response.data.user)
-       this.setState({currentUser: response.data.user}, () => {
+       this.setState({currentUser: response.data.user, feedToAdd: ''}, () => {
         localStorage.setItem('currentUser', JSON.stringify(this.state.currentUser))
       })
     })
+    document.getElementById('new-feed').value = ''
   }
   
   
@@ -55,13 +54,34 @@ class FeedList extends Component {
       })
   }
 
+  toggleModal(){
+    this.state.modalOpen === false ? this.setState({ modalOpen: true }) : this.setState({modalOpen: false})
+  }
+
   render() {
     return (
+      <>
+    
+      
+       <Modal
+          onClose={() => this.setState({modalOpen: false})}
+          onOpen={() => this.setState({modalOpen: true})}
+          open={this.state.modalOpen}
+        >
+
+        <Modal.Header>Update RSS Feeed</Modal.Header>
+        
+        
+        </Modal>
+
+
+
+
+
       <div className="ui main text container">
         <h1 className="ui header">My RSS Feeds</h1>
-
         <div className="ui input">
-          <input type="text" placeholder="Add RSS Feed" onChange={this.handleChange} />
+          <input id="new-feed" type="text" placeholder="Add RSS Feed" onChange={this.handleChange} />
           <input value="Enter" type="button" className="ui button" onClick={this.addFeed} />
         </div>
         <div className="ui feed">
@@ -72,8 +92,11 @@ class FeedList extends Component {
             </div>
             <div className="content">
               <div data-id={item._id} onClick={this.viewFeedItems} className="date">
-                {item.feedUrl} - <i className="info circle icon"></i>
+                {item.feedUrl}
               </div>
+           
+              <Icon onClick={this.toggleModal} name="info circle" size="large" />
+
               <div className="summary">
                 {item.title} - {item.description}
               </div>
@@ -83,6 +106,7 @@ class FeedList extends Component {
    : <h3>No Feeds</h3> }
     </div>
   </div>
+  </>
     )
   }
 }
