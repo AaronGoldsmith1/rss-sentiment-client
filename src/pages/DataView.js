@@ -42,28 +42,35 @@ export default class DataView extends Component {
 
 		const options = {
 			animationEnabled: true,
+			animationDuration: 2000,
+			theme: 'dark1', //“light1″,”light2”, “dark1”, “dark2”
 			title: {
 				text: "RSS Feed Items Sentiment Polarity",
+				// fontFamily: 'Lato'
 			},
 			toolTip: {
-				shared: true
+				shared: true,
+        // fontFamily: 'Lato'
 			},
 			legend: {
-				verticalAlign: "top"
+				verticalAlign: "top",
+				// fontFamily: 'Lato'
 			},
 			axisY: {
 				interval: 10,
-				suffix: "%"
+				suffix: "%",
+				
 			},
 			axisX : { 
 				labelMaxWidth: 240,
 				labelAutoFit: true,
 				labelWrap: true,
-				labelTextAlign: 'center'
+				labelTextAlign: 'center',
+				
          },
 			data: [{
 				type: "stackedBar100",
-				color: "#F7CB15",
+				color: "#56c03a",
 				name: "Very Positive",
 				showInLegend: true,
 				indexLabel: false,
@@ -72,7 +79,7 @@ export default class DataView extends Component {
 				dataPoints: parsedData.veryPositive.reverse()
 			},{
 				type: "stackedBar100",
-				color: "#9bbb59",
+				color: "#beffb1",
 				name: "Slightly Positive",
 				showInLegend: true,
 				indexLabel: false,
@@ -81,7 +88,7 @@ export default class DataView extends Component {
 				dataPoints: parsedData.slightlyPositive.reverse()
 			},{
 				type: "stackedBar100",
-				color: "#7f7f7f",
+				color: "#cccccc",
 				name: "Neutral",
 				showInLegend: true,
 				indexLabel: false,
@@ -90,7 +97,7 @@ export default class DataView extends Component {
 				dataPoints: parsedData.neutral.reverse()
 			},{
 				type: "stackedBar100",
-				color: "#76BED0",
+				color: "#fe9998",
 				name: "Slightly Negative",
 				showInLegend: true,
 				indexLabel: false,
@@ -99,7 +106,7 @@ export default class DataView extends Component {
 				dataPoints: parsedData.slightlyNegative.reverse()
 			},{
 				type: "stackedBar100",
-				color: "black",
+				color: "#df5253",
 				name: "Very Negative",
 				showInLegend: true,
 				indexLabel: false,
