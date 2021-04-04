@@ -4,6 +4,8 @@ import { withRouter } from 'react-router-dom';
 
 import { Button, Header, Modal, Icon } from 'semantic-ui-react'
 
+import './FeedList.css'
+
 class FeedList extends Component {
   constructor(props) {
     super(props)
@@ -11,18 +13,36 @@ class FeedList extends Component {
     this.state = { 
       modalOpen: false,
       currentUser: this.props.user,
-      feedToAdd: '' 
+      feedToAdd: '',
+      feedToUpdate: ''
     }
     
     this.viewFeedItems = this.viewFeedItems.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.addFeed = this.addFeed.bind(this)
+    this.deleteFeed = this.deleteFeed.bind(this)
     this.toggleModal = this.toggleModal.bind(this)
   }
 
   handleChange(e) {
     this.setState({ feedToAdd: e.target.value });
   } 
+
+  deleteFeed(item) {
+    const data = {
+      userId: this.props.user._id,
+      feedId: item._id
+    }
+
+    axios.delete('http://localhost:4000/api/v1/feeds/destroy', {data: data}, { headers: { 'Content-Type': 'application/json' }})
+     .then((response) => {
+       console.log(response)
+       this.setState({ currentUser: response.data.data.user }, () => {
+        localStorage.setItem('currentUser', JSON.stringify(this.state.currentUser))
+      })
+    })
+  }
+
 
   addFeed() {
     const data = {
@@ -54,8 +74,10 @@ class FeedList extends Component {
       })
   }
 
-  toggleModal(){
-    this.state.modalOpen === false ? this.setState({ modalOpen: true }) : this.setState({modalOpen: false})
+  toggleModal(item){
+    this.state.modalOpen === false ? 
+    this.setState({ modalOpen: true, feedToUpdate: item }) : 
+    this.setState({modalOpen: false, feedToUpdate: '' })
   }
 
   render() {
@@ -70,13 +92,31 @@ class FeedList extends Component {
         >
 
         <Modal.Header>Update RSS Feeed</Modal.Header>
-        
-        
+        <Modal.Content>
+            <Modal.Description>
+            <Header>Adjust Sentiment Filter Strength </Header>
+            <h5>Feed: {this.state.feedToUpdate.title}</h5>
+            
+            <h5>Filter Strength: {this.state.feedToUpdate.filterStrength}</h5>
+              <i size="huge" className="frown outline icon filter-icons"></i>
+            <Button.Group size='large'>  
+              <Button disabled>0</Button>
+              <Button>1</Button>
+              <Button>2</Button>
+              <Button>3</Button>
+            </Button.Group>
+              <i size="huge" className="smile outline icon filter-icons"></i>
+            </Modal.Description>
+            </Modal.Content>
+          <Modal.Actions>
+          <Button color='black' onClick={() => this.setState({modalOpen: false})}>Cancel</Button>
+        <Button
+          content="Submit"
+          onClick={() => this.setState({modalOpen: false})}
+          positive
+        />
+          </Modal.Actions>
         </Modal>
-
-
-
-
 
       <div className="ui main text container">
         <h1 className="ui header">My RSS Feeds</h1>
@@ -95,8 +135,8 @@ class FeedList extends Component {
                 {item.feedUrl}
               </div>
            
-              <Icon onClick={this.toggleModal} name="info circle" size="large" />
-
+              <Icon onClick={() => this.toggleModal(item)} name="info circle" size="large" />
+              <Icon onClick={() => this.deleteFeed(item)} name="trash alternate" size="large" />
               <div className="summary">
                 {item.title} - {item.description}
               </div>
