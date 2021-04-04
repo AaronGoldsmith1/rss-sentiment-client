@@ -1,8 +1,7 @@
 import {Component} from 'react'
+import {CanvasJSChart} from 'canvasjs-react-charts'
 
 import './DataView.css'
-
-import {CanvasJSChart} from 'canvasjs-react-charts'
 
 
 export default class DataView extends Component {
@@ -13,10 +12,6 @@ export default class DataView extends Component {
     slightlyPositive: [],
     veryPositive: []
   }
-  
-  
-  
-
   
   render() {
 		const titles = []
@@ -118,9 +113,8 @@ export default class DataView extends Component {
 		}
 		return (
 		<div>
-			<CanvasJSChart options = {options}/>
+			<CanvasJSChart options={options}/>
 			<span className="watermark-cover"></span>
-
 		</div>
 		);
 	}

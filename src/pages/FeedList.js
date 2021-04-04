@@ -102,7 +102,6 @@ class FeedList extends Component {
   }
 
   render() {
-
     return (
       <>
        <Modal
@@ -120,7 +119,7 @@ class FeedList extends Component {
             <h5>Filter Strength: {this.state.filterStrength ? this.state.filterStrength : this.state.feedToUpdate.filterStrength }</h5>
               <i size="huge" className="frown outline icon filter-icons"></i>
             <div className="ui buttons">  
-              <button className="ui button" onClick={() => this.setState({filterStrength: 0})}>0</button>
+              <button className="ui button" onClick={() => this.setState({filterStrength: '0'})}>0</button>
               <button className="ui button" onClick={() => this.setState({filterStrength: 1})}>1</button>
               <button className="ui button" onClick={() => this.setState({filterStrength: 2})}>2</button>
               <button className="ui button" onClick={() => this.setState({filterStrength: 3})}>3</button>
