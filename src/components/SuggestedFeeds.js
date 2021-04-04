@@ -1,9 +1,9 @@
 import {Component} from 'react'
 import { Button, Icon, Modal, List, Transition } from 'semantic-ui-react'
 
-
 import feedData from './feeds'
 import axios from 'axios'
+
 
 class SuggestedFeeds extends Component {
   constructor(props) {
@@ -15,9 +15,8 @@ class SuggestedFeeds extends Component {
     }
     this.handleAdd = this.handleAdd.bind(this)
     this.addFeed = this.addFeed.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
-  
-
 
   handleAdd(feedUrl, idx) {
     const updatedFeeds = this.state.feeds
@@ -28,8 +27,7 @@ class SuggestedFeeds extends Component {
   }
 
 
-
-    addFeed(feedUrl) {
+  addFeed(feedUrl) {
     const data = {
       userId: this.props.currentUser._id,
       feedUrl: feedUrl
@@ -37,10 +35,15 @@ class SuggestedFeeds extends Component {
     axios.post('http://localhost:4000/api/v1/feeds/', data, { headers: { 'Content-Type': 'application/json' }})
     .then((response) => {
       console.log(response)
-       this.setState({currentUser: response.data.user, feedToAdd: ''}, () => {
+       this.setState({currentUser: response.data.user}, () => {
         localStorage.setItem('currentUser', JSON.stringify(this.state.currentUser))
       })
     })
+  }
+
+  handleSubmit() {
+    this.setState({open: false})
+    window.location.reload()
   }
   
   
@@ -75,7 +78,7 @@ class SuggestedFeeds extends Component {
         </Modal.Description>
       </Modal.Content>
       <Modal.Actions>
-        <Button primary onClick={() => this.setState({open: false})} >
+        <Button primary onClick={() => this.handleSubmit()} >
           Proceed <Icon name='chevron right' />
         </Button>
       </Modal.Actions>
