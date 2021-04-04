@@ -23,7 +23,7 @@ export default class FeedDetail extends Component {
         <div className="content">
           <a href={item.link}><span className="header">{item.title}</span></a>
        
-          <div className="">{moment(item.date).format('LLL')}</div>
+          <div className="">{moment(item.date).format('LL')}</div>
         </div>
         </div>
       })}

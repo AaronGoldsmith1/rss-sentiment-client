@@ -44,22 +44,6 @@
     linkUrl: 'http://www.nytimes.com/services/xml/rss/nyt/Business.xml',
   },
   {
-    linkText: 'Reuters: Top News',
-    linkUrl: 'http://feeds.reuters.com/reuters/topNews',
-  },
-  {
-    linkText: 'Reuters: World News',
-    linkUrl: 'http://feeds.reuters.com/Reuters/worldNews',
-  },
-  {
-    linkText: 'Reuters: Technology News',
-    linkUrl: 'http://feeds.reuters.com/reuters/technologyNews',
-  },
-  {
-    linkText: 'Reuters: Business News',
-    linkUrl: 'http://feeds.reuters.com/reuters/businessNews',
-  },
-  {
     linkText: 'Mashable',
     linkUrl: 'http://feeds.mashable.com/Mashable',
   },

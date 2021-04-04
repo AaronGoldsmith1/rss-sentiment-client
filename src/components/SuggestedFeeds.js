@@ -23,7 +23,7 @@ class SuggestedFeeds extends Component {
     const updatedFeeds = this.state.feeds
     updatedFeeds.splice(idx, 1)
     console.log(updatedFeeds)
-    this.setState({feeds: updatedFeeds.reverse()})
+    this.setState({feeds: updatedFeeds})
     this.addFeed(feedUrl)
   }
 
@@ -46,14 +46,12 @@ class SuggestedFeeds extends Component {
   
   render() {
 
-  
-
   return (
     <Modal
       open={this.state.open}
       onClose={() => this.setState({open: false})}
       onOpen={() => this.setState({open: true})}
-      trigger={<Button>Scrolling Content Modal</Button>}
+      trigger={<Button>Please Select RSS Feeds</Button>}
     >
       <Modal.Header>Please Select Some RSS Feeds</Modal.Header>
       <Modal.Content scrolling>
