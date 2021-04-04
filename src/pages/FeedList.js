@@ -71,13 +71,11 @@ class FeedList extends Component {
     console.log(data)
     axios.put('http://localhost:4000/api/v1/feeds/update', data, { headers: { 'Content-Type': 'application/json' }})
     .then((response) => {
-      console.log(response.data.data.user)
       this.setState({currentUser: response.data.data.user, modalOpen: false, filterStrength: ''}, () => {
         localStorage.setItem('currentUser', JSON.stringify(this.state.currentUser))
       })
+      window.location.reload()
     })
-  
-   
   }
   
   viewFeedItems(e) {

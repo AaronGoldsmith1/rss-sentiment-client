@@ -21,7 +21,7 @@ export default class FeedDetail extends Component {
   
         return <div key={uuid.v4()} className="item">
         <div className="content">
-          <a href={item.link}><span className="header">{item.title}</span></a>
+          <a target="_blank" rel="noreferrer" href={item.link}><span className="header">{item.title}</span></a>
        
           <div className="">{moment(item.date).format('LL')}</div>
         </div>

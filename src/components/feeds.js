@@ -4,14 +4,6 @@
     linkUrl: 'http://xkcd.com/atom.xml',
   },
   {
-    linkText: 'CSS-Tricks',
-    linkUrl: 'http://feeds.feedburner.com/CssTricks',
-  },
-  {
-    linkText: 'Explosm.net',
-    linkUrl: 'http://feeds.feedburner.com/Explosm',
-  },
-  {
     linkText: 'BBC News – Home',
     linkUrl: 'http://feeds.bbci.co.uk/news/rss.xml',
   },
