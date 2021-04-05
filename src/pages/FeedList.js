@@ -1,10 +1,12 @@
 import axios from 'axios';
 import {Component} from 'react'
 import { withRouter } from 'react-router-dom';
-import { Button, Header, Modal, Icon, Item } from 'semantic-ui-react'
+import { Button, Header, Modal, Icon, Item, Label  } from 'semantic-ui-react'
 
 import SuggestedFeeds from '../components/SuggestedFeeds';
 import './FeedList.css'
+
+import _ from 'lodash';
 
 
 class FeedList extends Component {
@@ -138,23 +140,26 @@ class FeedList extends Component {
           </Modal.Actions>
         </Modal>
 
-      <div className="ui main text container">
-        <h1 className="ui header">My RSS Feeds</h1>
-        <div className="ui input">
-          <input id="new-feed" type="text" placeholder="Add RSS Feed" onChange={this.handleChange} />
-          <input value="Enter" type="button" className="ui button" onClick={this.addFeed} />
+      <div className="ui main text container feed-container">
+        <Header as='h1' textAlign='center'>My RSS Feeds</Header>
+        <div className="ui container center aligned">
+          <div className="ui input  ">
+            <input id="new-feed" type="text" placeholder="Add RSS Feed" onChange={this.handleChange} />
+            <input value="Enter" type="button" className="ui button primary" onClick={this.addFeed} />
+          </div>
         </div>
         <Item.Group divided>
-        { this.state.currentUser.feeds.length ? this.state.currentUser.feeds.map((item, idx) => { 
+        { this.state.currentUser.feeds.length ? _.uniqBy(this.state.currentUser.feeds, 'feedUrl').map((item, idx) => { 
+          console.log(item)
           return <Item key={idx}> 
             <Item.Content>
-              
+              <Icon size="large" className="rss-icon" name="rss" />
             <Item.Header 
               as="a" 
               className="summary"
               data-id={item._id} 
               onClick={this.viewFeedItems}
-              > <Icon name="rss" />{item.title}</Item.Header>
+              > {item.title}</Item.Header>
               <div className="feed-icons">
                 <Icon onClick={() => this.toggleModal(item)} name="info circle" size="large" />
                 <Icon onClick={() => this.deleteFeed(item)} name="trash alternate" size="large" />
@@ -163,7 +168,10 @@ class FeedList extends Component {
               <Item.Meta>{item.description}</Item.Meta>
               <Item.Extra>{item.feedUrl}</Item.Extra>
            
-            
+            { item.imageUrl ? <Item.Image size="mini" src={item.imageUrl} alt="rss"/> : '' }
+              <Label className="feed-icons" as='a' target="_blank" rel="noreferrer" href={item.sourceUrl}>
+                <Icon name='linkify' /> Source
+              </Label>
 
            </Item.Content>
         </Item>
@@ -184,3 +192,7 @@ class FeedList extends Component {
 export default withRouter(FeedList)
 //  { item.imageUrl ? <Item.Image size="mini" src={item.imageUrl} alt="rss"/> : <i className="rss icon"></i> }
   //  <Item.Description as='a' data-id={item._id} onClick={this.viewFeedItems} className="date">{item.feedUrl}</Item.Description>
+
+  //  <Label as='a'>
+  //   <Icon name='mail' /> 23
+  // </Label>

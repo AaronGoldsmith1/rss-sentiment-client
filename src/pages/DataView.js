@@ -3,6 +3,8 @@ import {CanvasJSChart} from 'canvasjs-react-charts'
 
 import './DataView.css'
 
+import _ from 'lodash';
+
 
 export default class DataView extends Component {
   precentages = {
@@ -15,8 +17,11 @@ export default class DataView extends Component {
   
   render() {
 		const titles = []
-		this.props.data.forEach(feed => titles.push(feed.title))
-    const parsedData = this.props.data.reduce((acc, val) => {
+		let currentData = this.props.Data
+		currentData = _.uniqBy(this.props.data, 'feedUrl')
+		currentData.forEach(feed => titles.push(feed.title))
+    
+		const parsedData = currentData.reduce((acc, val) => {
 			for (let key in val.chartData) {
 			
 				let title = val.chartData.title
