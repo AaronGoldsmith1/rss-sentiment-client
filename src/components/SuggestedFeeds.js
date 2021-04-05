@@ -1,5 +1,5 @@
 import {Component} from 'react'
-import { Button, Icon, Modal, List, Transition } from 'semantic-ui-react'
+import { Button, Icon, Modal, List } from 'semantic-ui-react'
 
 import feedData from './feeds'
 import axios from 'axios'

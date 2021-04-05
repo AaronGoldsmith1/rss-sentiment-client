@@ -1,7 +1,9 @@
 import {Component} from 'react'
 
 import uuid from 'uuid';
-import moment from 'moment';
+
+// import { stripHtml } from "string-strip-html";
+// import moment from 'moment';
 
 export default class FeedDetail extends Component {
 
@@ -13,17 +15,19 @@ export default class FeedDetail extends Component {
   
     return (
         <>
-    <h1>{this.title} - Feed Items</h1>
+    <h1>{this.title}</h1>
     
     <div className="five wide column">
       <div className="ui relaxed divided list">
        {this.feedItems.map((item) => {
-  
+        console.log(item)
         return <div key={uuid.v4()} className="item">
         <div className="content">
           <a target="_blank" rel="noreferrer" href={item.link}><span className="header">{item.title}</span></a>
-       
-          <div className="">{moment(item.date).format('LL')}</div>
+        {item.description}
+        
+   
+        <div>Score: {item.score.toFixed(2)}</div>
         </div>
         </div>
       })}
@@ -33,3 +37,5 @@ export default class FeedDetail extends Component {
     )
   }
 }
+
+    //  <div className="">{moment(item.date).format('LL')}</div>

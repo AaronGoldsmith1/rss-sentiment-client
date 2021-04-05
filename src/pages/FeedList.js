@@ -1,12 +1,11 @@
 import axios from 'axios';
 import {Component} from 'react'
 import { withRouter } from 'react-router-dom';
-
-import { Button, Header, Modal, Icon } from 'semantic-ui-react'
-
-import './FeedList.css'
+import { Button, Header, Modal, Icon, Item } from 'semantic-ui-react'
 
 import SuggestedFeeds from '../components/SuggestedFeeds';
+import './FeedList.css'
+
 
 class FeedList extends Component {
   constructor(props) {
@@ -44,6 +43,7 @@ class FeedList extends Component {
        this.setState({ currentUser: response.data.data.user }, () => {
         localStorage.setItem('currentUser', JSON.stringify(this.state.currentUser))
       })
+      window.location.reload()
     })
   }
 
@@ -58,8 +58,9 @@ class FeedList extends Component {
        this.setState({currentUser: response.data.user, feedToAdd: ''}, () => {
         localStorage.setItem('currentUser', JSON.stringify(this.state.currentUser))
       })
+      window.location.reload()
     })
-    document.getElementById('new-feed').value = ''
+    // document.getElementById('new-feed').value = ''
   }
   
   updateFeed() {
@@ -143,24 +144,29 @@ class FeedList extends Component {
           <input id="new-feed" type="text" placeholder="Add RSS Feed" onChange={this.handleChange} />
           <input value="Enter" type="button" className="ui button" onClick={this.addFeed} />
         </div>
-        <div className="ui feed">
+        <Item.Group divided>
         { this.state.currentUser.feeds.length ? this.state.currentUser.feeds.map((item, idx) => { 
-        return <div key={idx} className="event">
-            <div className="label">
-              { item.imageUrl ? <img src={item.imageUrl} alt="rss"/> : <i className="rss icon"></i> }
-            </div>
-            <div className="content">
-              <div data-id={item._id} onClick={this.viewFeedItems} className="date">
-                {item.feedUrl}
+          return <Item key={idx}> 
+            <Item.Content>
+              
+            <Item.Header 
+              as="a" 
+              className="summary"
+              data-id={item._id} 
+              onClick={this.viewFeedItems}
+              > <Icon name="rss" />{item.title}</Item.Header>
+              <div className="feed-icons">
+                <Icon onClick={() => this.toggleModal(item)} name="info circle" size="large" />
+                <Icon onClick={() => this.deleteFeed(item)} name="trash alternate" size="large" />
               </div>
+              
+              <Item.Meta>{item.description}</Item.Meta>
+              <Item.Extra>{item.feedUrl}</Item.Extra>
            
-              <Icon onClick={() => this.toggleModal(item)} name="info circle" size="large" />
-              <Icon onClick={() => this.deleteFeed(item)} name="trash alternate" size="large" />
-              <div className="summary">
-                {item.title} - {item.description}
-              </div>
-            </div>
-        </div>
+            
+
+           </Item.Content>
+        </Item>
       })
    : 
   
@@ -168,7 +174,7 @@ class FeedList extends Component {
   <SuggestedFeeds currentUser={this.state.currentUser} addFeed={this.addFeed} />
   
   }
-    </div>
+    </Item.Group>
   </div>
   </>
     )
@@ -176,3 +182,5 @@ class FeedList extends Component {
 }
 
 export default withRouter(FeedList)
+//  { item.imageUrl ? <Item.Image size="mini" src={item.imageUrl} alt="rss"/> : <i className="rss icon"></i> }
+  //  <Item.Description as='a' data-id={item._id} onClick={this.viewFeedItems} className="date">{item.feedUrl}</Item.Description>

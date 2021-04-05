@@ -33,8 +33,6 @@ export default class DataView extends Component {
 			}
 		}
 
-		console.log(parsedData)
-
 		const options = {
 			animationEnabled: true,
 			animationDuration: 2000,

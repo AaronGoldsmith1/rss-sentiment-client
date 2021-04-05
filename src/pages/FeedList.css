@@ -1,3 +1,11 @@
+.feed-icons {
+  float: right;
+}
+
+.feed-icons:hover {
+  cursor: pointer;
+}
+
 .filter-icons {
   font-size: 30px !important;
 }
