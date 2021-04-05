@@ -40,8 +40,9 @@ export default class DataView extends Component {
 
 		const options = {
 			animationEnabled: true,
-			animationDuration: 2000,
-			theme: 'light1', //“light1″,”light2”, “dark1”, “dark2”
+			animationDuration: 1500,
+			height: 550,
+			theme: 'dark2', //“light1″,”light2”, “dark1”, “dark2”
 			title: {
 				text: "RSS Feed Items Sentiment Polarity",
 				fontFamily: 'Lato'
