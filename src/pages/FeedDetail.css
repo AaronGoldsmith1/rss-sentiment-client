@@ -1,0 +1,9 @@
+.detail-list--header {
+  padding-bottom: 5px;
+  font-size: 12px;
+  color: grey;
+}
+
+.detail-list--info-icon {
+  float: right;
+}

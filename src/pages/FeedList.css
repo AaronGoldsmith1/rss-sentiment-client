@@ -17,6 +17,12 @@
 
 .filter-icons {
   font-size: 30px !important;
+  position: relative;
+  top: 6px;
+}
+
+.filter-icons__frown {
+  left: 3px;
 }
 
 

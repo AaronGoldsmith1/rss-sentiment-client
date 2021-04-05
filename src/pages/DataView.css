@@ -3,7 +3,7 @@
 }
 
 .watermark-cover {
-  background-color: #32373A;
+  background-color: white;
   padding: 35px;
   position: relative;
   top: 16px;
@@ -11,11 +11,3 @@
 }
 
 /* #32373A; dark theme background */
-
-
-/* #56c03a
-#beffb1
-
-#fe9998
-#df5253
-#cccccc */

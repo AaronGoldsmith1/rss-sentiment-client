@@ -57,11 +57,11 @@ class App extends Component {
         <NavBar currentUser={this.state.currentUser} />
          <Switch>
           <Route exact path='/' component={() => <Home homePath={this.state.currentUser ? '/feeds' : '/login' } /> }/>
-          <Route exact path='/signup' component={() =>  <SignUp handleSignup={this.handleSignup} /> } />
+          <Route exact path='/signup' component={() => <SignUp handleSignup={this.handleSignup} /> } />
           <Route exact path='/login' component={() => <LogIn handleLogin={this.handleLogin} />  } />
           <Route exact path='/feeds' component={() => this.state.currentUser ? <FeedList user={this.state.currentUser ? this.state.currentUser : []} /> : <LogIn handleLogin={this.handleLogin} />  } />
           <Route exact path='/feeds/detail' component={ this.state.currentUser ? FeedDetail : () => <LogIn handleLogin={this.handleLogin} /> }/>
-          <Route exact path='/data' component={ () => this.state.currentUser ? <DataView data={ this.state.currentUser? this.state.currentUser.feeds : []} /> : <LogIn handleLogin={this.handleLogin} /> }/>
+          <Route exact path='/data' component={ () => this.state.currentUser ? <DataView data={ this.state.currentUser ? this.state.currentUser.feeds : []} /> : <LogIn handleLogin={this.handleLogin} /> }/>
         </Switch>
         
       </div>

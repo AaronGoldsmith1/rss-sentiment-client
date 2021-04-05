@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {Component} from 'react'
 import { withRouter } from 'react-router-dom';
-import { Button, Header, Modal, Icon, Item, Label  } from 'semantic-ui-react'
+import { Button, Header, Modal, Icon, Item, Label, Popup  } from 'semantic-ui-react'
 
 import SuggestedFeeds from '../components/SuggestedFeeds';
 import './FeedList.css'
@@ -112,14 +112,14 @@ class FeedList extends Component {
           open={this.state.modalOpen}
         >
 
-        <Modal.Header>Update RSS Feeed</Modal.Header>
+        <Modal.Header>Update RSS Feed: {this.state.feedToUpdate.title} </Modal.Header>
         <Modal.Content>
-            <Modal.Description>
-            <Header>Adjust Sentiment Filter Strength </Header>
-            <h5>Feed: {this.state.feedToUpdate.title}</h5>
+          <div className="ui container center aligned">
+            <Header as='h2'>Adjust Sentiment Filter Strength </Header>
+ 
             
-            <h5>Filter Strength: {this.state.filterStrength ? this.state.filterStrength : this.state.feedToUpdate.filterStrength }</h5>
-              <i size="huge" className="frown outline icon filter-icons"></i>
+            <h3>Current Filter Strength: {this.state.filterStrength ? this.state.filterStrength : this.state.feedToUpdate.filterStrength }</h3>
+              <i size="huge" className="frown outline icon filter-icons filter-icons__frown"></i>
             <div className="ui buttons">  
               <button className="ui button" onClick={() => this.setState({filterStrength: '0'})}>0</button>
               <button className="ui button" onClick={() => this.setState({filterStrength: 1})}>1</button>
@@ -127,7 +127,7 @@ class FeedList extends Component {
               <button className="ui button" onClick={() => this.setState({filterStrength: 3})}>3</button>
             </div>
               <i size="huge" className="smile outline icon filter-icons"></i>
-            </Modal.Description>
+            </div>
             </Modal.Content>
           <Modal.Actions>
           <Button color='black' onClick={() => this.setState({modalOpen: false})}>Cancel</Button>
@@ -160,18 +160,32 @@ class FeedList extends Component {
               onClick={this.viewFeedItems}
               > {item.title}</Item.Header>
               <div className="feed-icons">
-                <Icon onClick={() => this.toggleModal(item)} name="info circle" size="large" /> 
+             
                 
-                <Icon onClick={() => this.deleteFeed(item)} name="trash alternate" size="large" />
+               
               </div>
               
-              <Item.Meta className="feed-meta">{_.truncate(item.description, { length: 200 })}</Item.Meta>
-              <Item.Extra>{item.feedUrl}</Item.Extra>
+              <Item.Meta className="feed-meta">{item.description ? _.truncate(item.description, { length: 200 }) : 'RSS Feed'}</Item.Meta>  
            
-            { item.imageUrl ? <Item.Image size="mini" src={item.imageUrl} alt="rss"/> : null }
-              <Label className="feed-icons" as='a' target="_blank" rel="noreferrer" href={item.sourceUrl}>
+              <Popup inverted content={<Icon size="large" name="smile" />} trigger={
+              <Label as='a' onClick={() => this.toggleModal(item)}>
+                <Icon name='filter' /> Filter
+                <Label.Detail>{item.filterStrength}</Label.Detail>
+              </Label>
+              } />
+
+              <Popup inverted content={item.sourceUrl} trigger={
+              <Label as='a' target="_blank" rel="noreferrer" href={item.sourceUrl}>
                 <Icon name='linkify' /> Source
               </Label>
+              } />
+
+              <Popup inverted content="Are you sure?" trigger={
+               <Label className="feed-icons" as='a' onClick={() => this.deleteFeed(item)}>
+                <Icon name='trash' /> Delete
+              </Label>
+              } />
+
 
            </Item.Content>
         </Item>
@@ -190,9 +204,7 @@ class FeedList extends Component {
 }
 
 export default withRouter(FeedList)
-//  { item.imageUrl ? <Item.Image size="mini" src={item.imageUrl} alt="rss"/> : <i className="rss icon"></i> }
-  //  <Item.Description as='a' data-id={item._id} onClick={this.viewFeedItems} className="date">{item.feedUrl}</Item.Description>
 
-  //  <Label as='a'>
-  //   <Icon name='mail' /> 23
-  // </Label>
+//  <Item.Extra>{item.feedUrl}</Item.Extra>
+  // { item.imageUrl ? <Item.Image size="mini" src={item.imageUrl} alt="rss"/> : null }
+  //  <Icon onClick={() => this.deleteFeed(item)} name="trash alternate" size="large" />

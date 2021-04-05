@@ -1,10 +1,11 @@
-import {Component} from 'react'
-import { Button, Icon, Modal, List } from 'semantic-ui-react'
+import {Component} from 'react';
+import { Button, Icon, Modal, List } from 'semantic-ui-react';
 
-import feedData from './feeds'
-import axios from 'axios'
+import feedData from './feeds';
+import '../pages/FeedList.css';
 
-import '../pages/FeedList.css'
+import _ from 'lodash';
+import axios from 'axios';
 
 class SuggestedFeeds extends Component {
   constructor(props) {
@@ -15,7 +16,7 @@ class SuggestedFeeds extends Component {
       currentUser: this.props.currentUser
     }
     this.handleAdd = this.handleAdd.bind(this)
-    this.addFeed = this.addFeed.bind(this)
+    this.addFeed = _.throttle(this.addFeed.bind(this), 800)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 

@@ -1,6 +1,11 @@
 import {Component} from 'react'
 
 import uuid from 'uuid';
+import moment from 'moment';
+
+import { Header, List, Icon, Popup } from 'semantic-ui-react'
+
+import './FeedDetail.css'
 
 export default class FeedDetail extends Component {
 
@@ -12,25 +17,31 @@ export default class FeedDetail extends Component {
   
     return (
         <>
-    <h1>{this.title}</h1>
+    <Header as="h1" textAlign='center'>{this.title}</Header>
     
-    <div className="five wide column">
-      <div className="ui relaxed divided list">
+    <div className="ui main text container">
+      <List divided relaxed >
        {this.feedItems.map((item) => {
         console.log(item)
-        return <div key={uuid.v4()} className="item">
-        <div className="content">
-          <a target="_blank" rel="noreferrer" href={item.link}><span className="header">{item.title}</span></a>
-            {item.description.replace(/<[^>]+>/g, '')}
-        <div>Score: {item.score.toFixed(2)}</div>
-        </div>
-        </div>
+        return <List.Item key={uuid.v4()}>
+       
+
+          <List.Content>
+          <Popup inverted content={`Score: ${item.score.toFixed(2)}`} trigger={<Icon name="info circle" color="grey" className="detail-list--info-icon" />} />
+            <List.Header target="_blank" rel="noreferrer" href={item.link}>{item.title}</List.Header><div className="detail-list--header">{moment(item.date).fromNow()}</div>
+            <List.Item>{item.description.replace(/<[^>]+>/g, '')}</List.Item> 
+          </List.Content>
+        </List.Item>
       })}
-      </div>
+      </List>
     </div>
     </>
     )
   }
 }
 
-    //  <div className="">{moment(item.date).format('LL')}</div>
+    //  <div className="">{moment(item.date).fromNow()}</div>
+            // <div>Score: {item.score.toFixed(2)}</div>
+
+            //  <Icon name="info circle" size="small" /> 
+            //   <List.Icon name='linkify' />
