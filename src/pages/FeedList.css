@@ -6,6 +6,11 @@
   float: right;
 }
 
+.feed-icons--add-feed {
+  position: relative;
+  bottom: 15px;
+}
+
 .feed-icons:hover {
   cursor: pointer;
 }
@@ -14,8 +19,13 @@
   font-size: 30px !important;
 }
 
+
 .rss-icon {
   float: left;
   position: relative;
   top: -4px;
+}
+
+.feed-meta {
+  line-height: 1.5em !important;
 }

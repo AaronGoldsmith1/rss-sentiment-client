@@ -2,9 +2,6 @@ import {Component} from 'react'
 
 import uuid from 'uuid';
 
-// import { stripHtml } from "string-strip-html";
-// import moment from 'moment';
-
 export default class FeedDetail extends Component {
 
   feedItems = this.props.location.state.items;
@@ -24,9 +21,7 @@ export default class FeedDetail extends Component {
         return <div key={uuid.v4()} className="item">
         <div className="content">
           <a target="_blank" rel="noreferrer" href={item.link}><span className="header">{item.title}</span></a>
-        {item.description}
-        
-   
+            {item.description.replace(/<[^>]+>/g, '')}
         <div>Score: {item.score.toFixed(2)}</div>
         </div>
         </div>

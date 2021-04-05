@@ -62,7 +62,6 @@ class FeedList extends Component {
       })
       window.location.reload()
     })
-    // document.getElementById('new-feed').value = ''
   }
   
   updateFeed() {
@@ -145,7 +144,7 @@ class FeedList extends Component {
         <div className="ui container center aligned">
           <div className="ui input  ">
             <input id="new-feed" type="text" placeholder="Add RSS Feed" onChange={this.handleChange} />
-            <input value="Enter" type="button" className="ui button primary" onClick={this.addFeed} />
+            <input value="Enter" type="button" className="ui button primary" onClick={_.throttle(this.addFeed, 500)} />
           </div>
         </div>
         <Item.Group divided>
@@ -161,14 +160,15 @@ class FeedList extends Component {
               onClick={this.viewFeedItems}
               > {item.title}</Item.Header>
               <div className="feed-icons">
-                <Icon onClick={() => this.toggleModal(item)} name="info circle" size="large" />
+                <Icon onClick={() => this.toggleModal(item)} name="info circle" size="large" /> 
+                
                 <Icon onClick={() => this.deleteFeed(item)} name="trash alternate" size="large" />
               </div>
               
-              <Item.Meta>{item.description}</Item.Meta>
+              <Item.Meta className="feed-meta">{_.truncate(item.description, { length: 200 })}</Item.Meta>
               <Item.Extra>{item.feedUrl}</Item.Extra>
            
-            { item.imageUrl ? <Item.Image size="mini" src={item.imageUrl} alt="rss"/> : '' }
+            { item.imageUrl ? <Item.Image size="mini" src={item.imageUrl} alt="rss"/> : null }
               <Label className="feed-icons" as='a' target="_blank" rel="noreferrer" href={item.sourceUrl}>
                 <Icon name='linkify' /> Source
               </Label>
@@ -178,9 +178,9 @@ class FeedList extends Component {
       })
    : 
   
-      
-  <SuggestedFeeds currentUser={this.state.currentUser} addFeed={this.addFeed} />
-  
+      <div className="ui container center aligned">
+        <SuggestedFeeds currentUser={this.state.currentUser} addFeed={this.addFeed} />
+      </div>
   }
     </Item.Group>
   </div>

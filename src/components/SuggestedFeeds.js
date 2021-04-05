@@ -4,6 +4,7 @@ import { Button, Icon, Modal, List } from 'semantic-ui-react'
 import feedData from './feeds'
 import axios from 'axios'
 
+import '../pages/FeedList.css'
 
 class SuggestedFeeds extends Component {
   constructor(props) {
@@ -52,23 +53,21 @@ class SuggestedFeeds extends Component {
         open={this.state.open}
         onClose={() => this.setState({open: false})}
         onOpen={() => this.setState({open: true})}
-        trigger={<Button>Please Select RSS Feeds</Button>}
+        trigger={<Button>Click to Select RSS Feeds</Button>}
       >
         <Modal.Header>Please Select Some RSS Feeds</Modal.Header>
-        <Modal.Content scrolling>
-
-          <Modal.Description>
-            <List
-            divided
-            size='huge'
-            verticalAlign='middle'
-          >
-            {this.state.feeds.map((feed, idx) => (
-              <List.Item key={idx}>
-                
-                <List.Content header={feed.linkText} />
-                {feed.linkUrl} <Button onClick={() => this.handleAdd(feed.linkUrl, idx)}>+</Button>
-              </List.Item>
+          <Modal.Content scrolling>
+            <Modal.Description>
+              <List
+              divided
+              size='huge'
+              verticalAlign='middle'
+            >
+              {this.state.feeds.map((feed, idx) => (
+                <List.Item as="a" key={idx}>
+                  <List.Content header={feed.linkText} />
+                    {feed.linkUrl} <Button className="feed-icons feed-icons--add-feed" onClick={() => this.handleAdd(feed.linkUrl, idx)}>+</Button>
+                </List.Item>
             ))}
           </List>
           </Modal.Description>
