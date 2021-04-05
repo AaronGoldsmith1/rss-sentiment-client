@@ -9,3 +9,13 @@
 .home-landing--text h2 {
   margin-bottom: 50px;
 }
+
+pre {
+  text-align: left;
+}
+
+.filter-segment {
+  width: fit-content !important;
+  text-align: left;
+  margin: 0 auto;
+}
