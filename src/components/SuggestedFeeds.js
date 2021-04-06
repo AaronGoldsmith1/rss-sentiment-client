@@ -23,7 +23,6 @@ class SuggestedFeeds extends Component {
   handleAdd(feedUrl, idx) {
     const updatedFeeds = this.state.feeds
     updatedFeeds.splice(idx, 1)
-    console.log(updatedFeeds)
     this.setState({feeds: updatedFeeds})
     this.addFeed(feedUrl)
   }
@@ -36,7 +35,6 @@ class SuggestedFeeds extends Component {
     }
     axios.post('http://localhost:4000/api/v1/feeds/', data, { headers: { 'Content-Type': 'application/json' }})
     .then((response) => {
-      console.log(response)
        this.setState({currentUser: response.data.user}, () => {
         localStorage.setItem('currentUser', JSON.stringify(this.state.currentUser))
       })

@@ -47,7 +47,6 @@ class App extends Component {
       })
     })
     this.props.history.push('/feeds')
-
   }
 
 
@@ -63,7 +62,6 @@ class App extends Component {
           <Route exact path='/feeds/detail' component={ this.state.currentUser ? FeedDetail : () => <LogIn handleLogin={this.handleLogin} /> }/>
           <Route exact path='/data' component={ () => this.state.currentUser ? <DataView data={ this.state.currentUser ? this.state.currentUser.feeds : []} /> : <LogIn handleLogin={this.handleLogin} /> }/>
         </Switch>
-        
       </div>
     );
   }

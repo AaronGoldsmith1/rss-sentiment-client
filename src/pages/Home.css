@@ -17,5 +17,14 @@ pre {
 .filter-segment {
   width: fit-content !important;
   text-align: left;
-  margin: 0 auto;
+  margin: 0 auto !important;
+  font-size: 17px;
+}
+
+.bottom-section {
+  padding-bottom: 10% !important;
+}
+
+.home-header {
+  font-size: 45px !important;
 }

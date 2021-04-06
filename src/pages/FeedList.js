@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {Component} from 'react'
 import { withRouter } from 'react-router-dom';
-import { Button, Header, Modal, Icon, Item, Label, Popup  } from 'semantic-ui-react'
+import { Button, Header, Modal, Icon, Item, Label, Popup } from 'semantic-ui-react'
 
 import SuggestedFeeds from '../components/SuggestedFeeds';
 import './FeedList.css'
@@ -41,7 +41,6 @@ class FeedList extends Component {
 
     axios.delete('http://localhost:4000/api/v1/feeds/destroy', {data: data}, { headers: { 'Content-Type': 'application/json' }})
      .then((response) => {
-       console.log(response)
        this.setState({ currentUser: response.data.data.user }, () => {
         localStorage.setItem('currentUser', JSON.stringify(this.state.currentUser))
       })
@@ -70,7 +69,7 @@ class FeedList extends Component {
       feedId: this.state.feedToUpdate._id,
       userId: this.props.user._id
     }
-    console.log(data)
+
     axios.put('http://localhost:4000/api/v1/feeds/update', data, { headers: { 'Content-Type': 'application/json' }})
     .then((response) => {
       this.setState({currentUser: response.data.data.user, modalOpen: false, filterStrength: ''}, () => {
@@ -122,9 +121,9 @@ class FeedList extends Component {
               <i size="huge" className="frown outline icon filter-icons filter-icons__frown"></i>
             <div className="ui buttons">  
               <button className="ui button" onClick={() => this.setState({filterStrength: '0'})}>0</button>
-              <button className="ui button" onClick={() => this.setState({filterStrength: 1})}>1</button>
-              <button className="ui button" onClick={() => this.setState({filterStrength: 2})}>2</button>
-              <button className="ui button" onClick={() => this.setState({filterStrength: 3})}>3</button>
+              <button className="ui button" onClick={() => this.setState({filterStrength: '1'})}>1</button>
+              <button className="ui button" onClick={() => this.setState({filterStrength: '2'})}>2</button>
+              <button className="ui button" onClick={() => this.setState({filterStrength: '3'})}>3</button>
             </div>
               <i size="huge" className="smile outline icon filter-icons"></i>
             </div>
@@ -149,7 +148,7 @@ class FeedList extends Component {
         </div>
         <Item.Group divided>
         { this.state.currentUser.feeds.length ? _.uniqBy(this.state.currentUser.feeds, 'feedUrl').map((item, idx) => { 
-          console.log(item)
+
           return <Item key={idx}> 
             <Item.Content>
               <Icon size="large" className="rss-icon" name="rss" />
@@ -165,7 +164,7 @@ class FeedList extends Component {
                
               </div>
               
-              <Item.Meta className="feed-meta">{item.description ? _.truncate(item.description, { length: 200 }) : 'RSS Feed'}</Item.Meta>  
+              <Item.Meta className="feed-meta">{item.description ? _.truncate(item.description.replace(/<[^>]+>/g, ''), { length: 200 }) : 'RSS Feed'}</Item.Meta>  
            
               <Popup inverted content={<Icon size="large" name="smile" />} trigger={
               <Label as='a' onClick={() => this.toggleModal(item)}>
@@ -204,7 +203,3 @@ class FeedList extends Component {
 }
 
 export default withRouter(FeedList)
-
-//  <Item.Extra>{item.feedUrl}</Item.Extra>
-  // { item.imageUrl ? <Item.Image size="mini" src={item.imageUrl} alt="rss"/> : null }
-  //  <Icon onClick={() => this.deleteFeed(item)} name="trash alternate" size="large" />

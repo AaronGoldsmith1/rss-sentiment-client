@@ -84,14 +84,6 @@
     linkUrl: 'https://news.ycombinator.com/rss',
   },
   {
-    linkText: 'Scandinavia and the World',
-    linkUrl: 'http://feeds.feedburner.com/satwcomic',
-  },
-  {
-    linkText: 'Android Police',
-    linkUrl: 'http://www.androidpolice.com/feed/',
-  },
-  {
     linkText: 'Search Engine Land',
     linkUrl: 'http://feeds.searchengineland.com/searchengineland',
   },
@@ -122,18 +114,6 @@
   {
     linkText: 'Signal v. Noise – Medium',
     linkUrl: 'https://m.signalvnoise.com/feed',
-  },
-  {
-    linkText: 'Reddit’s r/technology',
-    linkUrl: 'https://www.reddit.com/r/technology/.rss',
-  },
-  {
-    linkText: 'Reddit’s r/worldnews',
-    linkUrl: 'https://www.reddit.com/r/worldnews/top/.rss',
-  },
-  {
-    linkText: 'Reddit’s r/games',
-    linkUrl: 'https://www.reddit.com/r/Games/top/.rss',
   }
 ]
 
