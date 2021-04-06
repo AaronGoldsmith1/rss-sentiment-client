@@ -84,10 +84,6 @@
     linkUrl: 'https://news.ycombinator.com/rss',
   },
   {
-    linkText: 'Search Engine Land',
-    linkUrl: 'http://feeds.searchengineland.com/searchengineland',
-  },
-  {
     linkText: 'Kotaku',
     linkUrl: 'http://feeds.gawker.com/kotaku/full',
   },

@@ -1,10 +1,12 @@
 import {Component} from 'react'
-import {CanvasJSChart} from 'canvasjs-react-charts'
+// import {CanvasJSChart} from 'canvasjs-react-charts'
+
+import CanvasJSReact from '../lib/canvasjs.react';
 
 import './DataView.css'
-
 import _ from 'lodash';
 
+const CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 export default class DataView extends Component {
   precentages = {
@@ -37,19 +39,19 @@ export default class DataView extends Component {
 				parsedData[key][i].label = titles[i]
 			}
 		}
-
+		console.log(parsedData)
 		const options = {
 			animationEnabled: true,
 			animationDuration: 1500,
 			height: 550,
-			theme: 'dark2', //“light1″,”light2”, “dark1”, “dark2”
+			theme: 'light1', //“light1″,”light2”, “dark1”, “dark2”
 			title: {
 				text: "RSS Feed Items Sentiment Polarity",
 				fontFamily: 'Lato'
 			},
 			toolTip: {
 				shared: true,
-        fontFamily: 'Lato'
+        fontFamily: 'Lato',
 			},
 			legend: {
 				verticalAlign: "top",
@@ -58,14 +60,14 @@ export default class DataView extends Component {
 			axisY: {
 				interval: 10,
 				suffix: "%",
-				labelFontFamily: 'Lato'
+				labelFontFamily: 'Lato',
 			},
 			axisX : { 
 				labelMaxWidth: 240,
 				labelAutoFit: true,
 				labelWrap: true,
 				labelTextAlign: 'center',
-				labelFontFamily: 'Lato'
+				labelFontFamily: 'Lato',
          },
 			data: [{
 				type: "stackedBar100",

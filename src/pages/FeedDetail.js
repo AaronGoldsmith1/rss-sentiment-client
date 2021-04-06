@@ -22,7 +22,7 @@ export default class FeedDetail extends Component {
     
     <div className="ui main text container">
       <List divided relaxed >
-       {this.feedItems.map((item) => {
+       {this.feedItems.length ? this.feedItems.map((item) => {
         return <List.Item key={uuid.v4()}>
           <List.Content>
           <Popup inverted content={`Score: ${item.score.toFixed(2)}`} trigger={<Icon name="info circle" color="grey" className="detail-list--info-icon" />} />
@@ -30,7 +30,9 @@ export default class FeedDetail extends Component {
             <List.Item>{_.truncate(item.description.replace(/<[^>]+>/g, ''), { length: 280 } )}</List.Item> 
           </List.Content>
         </List.Item>
-      })}
+      }) : 
+      <Header as="h2" textAlign='center' color="blue">No Items Found - Please Adjust Filter Strength.</Header>
+    }
       </List>
     </div>
     </>

@@ -2,16 +2,22 @@
   z-index: 1;
 }
 
+.canvasjs-chart-credit {
+  display: none;
+}
+
 .watermark-cover {
   background-color: #32373A;
   padding: 35px;
   padding-bottom: 0px;
   padding-top: 30px;
-  padding-right: 35px;
+  padding-right: 40px;
   padding-left: 35px;
   position: relative;
-  top: -17px;
+  top: -18px;
   z-index: 1;
 }
 
-/* #32373A; dark theme background */
+
+
+/* #32373A; dark2 theme background */
