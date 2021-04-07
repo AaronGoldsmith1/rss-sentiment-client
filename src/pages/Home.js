@@ -13,9 +13,9 @@ class Home extends Component {
     <div className="ui inverted vertical masthead center aligned segment home-landing--segment">
       <Container text className="home-landing--text">
     
-        <Icon size="big" name='rss' />
-        <Icon size="small" name='plus' />
-        <Icon size="big" name='smile outline' />
+        <Icon size="huge" name='rss' className="home-landing--icons__rss" />
+        <Icon size="large" name='plus' />
+        <Icon size="huge" name='smile outline' />
 
         <h1 className="home-header">
           RSS-Sentiment

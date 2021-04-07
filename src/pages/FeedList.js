@@ -147,7 +147,8 @@ class FeedList extends Component {
           </div>
         </div>
         <Item.Group divided>
-        { this.state.currentUser.feeds.length ? _.uniqBy(this.state.currentUser.feeds, 'feedUrl').map((item, idx) => { 
+        { this.state.currentUser && this.state.currentUser.feeds.length ? 
+          _.uniqBy(this.state.currentUser.feeds, 'feedUrl').map((item, idx) => { 
 
           return <Item key={idx}> 
             <Item.Content>
@@ -167,22 +168,22 @@ class FeedList extends Component {
               <Item.Meta className="feed-meta">{item.description ? _.truncate(item.description.replace(/<[^>]+>/g, ''), { length: 200 }) : 'RSS Feed'}</Item.Meta>  
            
               <Popup inverted content={<Icon size="large" name="smile" />} trigger={
-              <Label as='a' onClick={() => this.toggleModal(item)}>
-                <Icon name='filter' /> Filter
-                <Label.Detail>{item.filterStrength}</Label.Detail>
-              </Label>
+                <Label as='a' onClick={() => this.toggleModal(item)}>
+                  <Icon name='filter' /> Filter
+                  <Label.Detail>{item.filterStrength}</Label.Detail>
+                </Label>
               } />
 
               <Popup inverted content={item.sourceUrl} trigger={
-              <Label as='a' target="_blank" rel="noreferrer" href={item.sourceUrl}>
-                <Icon name='linkify' /> Source
-              </Label>
+                <Label as='a' target="_blank" rel="noreferrer" href={item.sourceUrl}>
+                  <Icon name='linkify' /> Source
+                </Label>
               } />
 
               <Popup inverted content="Are you sure?" trigger={
-               <Label className="feed-icons" as='a' onClick={() => this.deleteFeed(item)}>
-                <Icon name='trash' /> Delete
-              </Label>
+                <Label className="feed-icons" as='a' onClick={() => this.deleteFeed(item)}>
+                  <Icon name='trash' /> Delete
+                </Label>
               } />
 
 

@@ -10,6 +10,11 @@
   margin-bottom: 50px;
 }
 
+.home-landing--icons__rss {
+  position: relative;
+  left: 8px;
+}
+
 pre {
   text-align: left;
 }

@@ -1,7 +1,7 @@
 import {Component} from 'react'
-// import {CanvasJSChart} from 'canvasjs-react-charts'
-
 import CanvasJSReact from '../lib/canvasjs.react';
+
+import {Header} from 'semantic-ui-react'
 
 import './DataView.css'
 import _ from 'lodash';
@@ -19,7 +19,7 @@ export default class DataView extends Component {
   
   render() {
 		const titles = []
-		let currentData = this.props.Data
+		let currentData;
 		currentData = _.uniqBy(this.props.data, 'feedUrl')
 		currentData.forEach(feed => titles.push(feed.title))
     
@@ -39,7 +39,7 @@ export default class DataView extends Component {
 				parsedData[key][i].label = titles[i]
 			}
 		}
-		console.log(parsedData)
+
 		const options = {
 			animationEnabled: true,
 			animationDuration: 1500,
@@ -118,9 +118,11 @@ export default class DataView extends Component {
 		]
 		}
 		return (
-		<div>
-			<CanvasJSChart options={options}/>
-			<span className="watermark-cover"></span>
+		<div className="chart">
+		{titles.length
+		?	<><CanvasJSChart options={options} /><span className="watermark-cover"></span></>
+		:<Header as='h1' textAlign='center'>Enter RSS Feeds To View Data</Header>
+		}
 		</div>
 		);
 	}
