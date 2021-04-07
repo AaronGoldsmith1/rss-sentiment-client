@@ -48,7 +48,6 @@ class FeedList extends Component {
     })
   }
 
-
   addFeed() {
     const data = {
       userId: this.props.user._id,
@@ -159,11 +158,6 @@ class FeedList extends Component {
               data-id={item._id} 
               onClick={this.viewFeedItems}
               > {item.title}</Item.Header>
-              <div className="feed-icons">
-             
-                
-               
-              </div>
               
               <Item.Meta className="feed-meta">{item.description ? _.truncate(item.description.replace(/<[^>]+>/g, ''), { length: 200 }) : 'RSS Feed'}</Item.Meta>  
            
@@ -185,7 +179,6 @@ class FeedList extends Component {
                   <Icon name='trash' /> Delete
                 </Label>
               } />
-
 
            </Item.Content>
         </Item>
